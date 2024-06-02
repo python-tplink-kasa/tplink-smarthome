@@ -110,7 +110,7 @@ class VacuumRecords(SmartModule):
                 "total_clean_time",
                 "Total time cleaned",
                 container=self,
-                attribute_getter="total_clean_area",
+                attribute_getter="total_clean_time",
                 category=Feature.Category.Info,
                 type=Feature.Type.Sensor,
             )
