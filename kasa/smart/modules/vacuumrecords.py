@@ -1,11 +1,12 @@
-"""Implementation of vacuum records for experimental vacuum support."""
+"""Implementation of vacuum cleaning records."""
 
 from __future__ import annotations
 
 import logging
+from dataclasses import dataclass
 from datetime import datetime
 
-from pydantic.v1 import BaseModel
+from mashumaro import DataClassDictMixin
 
 from ...feature import Feature
 from ..smartmodule import SmartModule
@@ -13,7 +14,8 @@ from ..smartmodule import SmartModule
 _LOGGER = logging.getLogger(__name__)
 
 
-class LatestRecord(BaseModel):
+@dataclass
+class LatestRecord(DataClassDictMixin):
     """Stats from last clean.
 
     TODO: this is just a list-formatted Record, with only some fields being available.
@@ -25,7 +27,8 @@ class LatestRecord(BaseModel):
     error: int  # most likely
 
 
-class Record(BaseModel):
+@dataclass
+class Record(DataClassDictMixin):
     """Historical cleanup result.
 
     Example:
@@ -55,7 +58,8 @@ class Record(BaseModel):
     record_index: int
 
 
-class Records(BaseModel):
+@dataclass
+class Records(DataClassDictMixin):
     """Response payload for getCleanRecords.
 
     Example:
@@ -85,21 +89,21 @@ class Records(BaseModel):
 
 
 class VacuumRecords(SmartModule):
-    """Implementation of vacuum records for experimental vacuum support."""
+    """Implementation of vacuum cleaning records."""
 
     REQUIRED_COMPONENT = "consumables"
     QUERY_GETTER_NAME = "getCleanRecords"
 
-    def _initialize_features(self):
+    def _initialize_features(self) -> None:
         """Initialize features."""
         self._add_feature(
             Feature(
                 self._device,
-                "total_clean_area",
-                "Total area cleaned",
+                id="total_clean_area",
+                name="Total area cleaned",
                 container=self,
                 attribute_getter="total_clean_area",
-                unit="sqm",
+                unit_getter=lambda: "sqm",
                 category=Feature.Category.Info,
                 type=Feature.Type.Sensor,
             )
@@ -107,8 +111,8 @@ class VacuumRecords(SmartModule):
         self._add_feature(
             Feature(
                 self._device,
-                "total_clean_time",
-                "Total time cleaned",
+                id="total_clean_time",
+                name="Total time cleaned",
                 container=self,
                 attribute_getter="total_clean_time",
                 category=Feature.Category.Info,
@@ -118,8 +122,8 @@ class VacuumRecords(SmartModule):
         self._add_feature(
             Feature(
                 self._device,
-                "total_clean_count",
-                "Total clean count",
+                id="total_clean_count",
+                name="Total clean count",
                 container=self,
                 attribute_getter="total_clean_count",
                 category=Feature.Category.Debug,
