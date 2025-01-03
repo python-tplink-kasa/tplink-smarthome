@@ -125,7 +125,8 @@ class KlapTransport(BaseTransport):
         self._session_cookie: dict[str, Any] | None = None
 
         _LOGGER.debug("Created KLAP transport for %s", self._host)
-        self._app_url = URL(f"http://{self._host}:{self._port}/app")
+        protocol = "https" if config.connection_type.https else "http"
+        self._app_url = URL(f"{protocol}://{self._host}:{self._port}/app")
         self._request_url = self._app_url / "request"
 
     @property
