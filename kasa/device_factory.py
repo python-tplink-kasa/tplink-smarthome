@@ -6,7 +6,6 @@ import logging
 import time
 from typing import Any
 
-from . import EncryptType
 from .device import Device
 from .device_type import DeviceType
 from .deviceconfig import DeviceConfig, DeviceEncryptionType, DeviceFamily
@@ -208,7 +207,7 @@ def get_protocol(config: DeviceConfig, *, strict: bool = False) -> BaseProtocol 
     # Older FW used a different transport
         if strict and ctype.encryption_type is not DeviceEncryptionType.Aes:
             return None
-        and ctype.encryption_type is EncryptType.Aes
+        and ctype.encryption_type is DeviceEncryptionType.Aes
     ):
         return SmartProtocol(transport=SslTransport(config=config))
 
