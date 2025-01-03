@@ -6,6 +6,7 @@ import logging
 import time
 from typing import Any
 
+from . import EncryptType
 from .device import Device
 from .device_type import DeviceType
 from .deviceconfig import DeviceConfig, DeviceEncryptionType, DeviceFamily
@@ -189,6 +190,7 @@ def get_protocol(config: DeviceConfig, *, strict: bool = False) -> BaseProtocol 
     :param config: Device config to derive protocol
     :param strict: Require exact match on encrypt type
     """
+    _LOGGER.debug("Finding protocol for %s", config.host)
     ctype = config.connection_type
     protocol_name = ctype.device_family.value.split(".")[0]
     _LOGGER.debug("Finding protocol for %s", ctype.device_family)
@@ -203,9 +205,11 @@ def get_protocol(config: DeviceConfig, *, strict: bool = False) -> BaseProtocol 
             return None
         return IotProtocol(transport=LinkieTransportV2(config=config))
 
-    if ctype.device_family is DeviceFamily.SmartTapoRobovac:
+    # Older FW used a different transport
         if strict and ctype.encryption_type is not DeviceEncryptionType.Aes:
             return None
+        and ctype.encryption_type is EncryptType.Aes
+    ):
         return SmartProtocol(transport=SslTransport(config=config))
 
     protocol_transport_key = (
@@ -223,6 +227,7 @@ def get_protocol(config: DeviceConfig, *, strict: bool = False) -> BaseProtocol 
         "IOT.KLAP": (IotProtocol, KlapTransport),
         "SMART.AES": (SmartProtocol, AesTransport),
         "SMART.KLAP": (SmartProtocol, KlapTransportV2),
+        "SMART.KLAP.HTTPS": (SmartProtocol, KlapTransportV2),
         # H200 is device family SMART.TAPOHUB and uses SmartCamProtocol so use
         # https to distuingish from SmartProtocol devices
         "SMART.AES.HTTPS": (SmartCamProtocol, SslAesTransport),
