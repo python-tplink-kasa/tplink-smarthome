@@ -3,15 +3,25 @@
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass
-from datetime import datetime
+from dataclasses import dataclass, field
+from datetime import datetime, timedelta
+from enum import IntEnum
 
-from mashumaro import DataClassDictMixin
+from mashumaro import DataClassDictMixin, field_options
+from mashumaro.types import SerializationStrategy
 
 from ...feature import Feature
 from ..smartmodule import SmartModule
 
 _LOGGER = logging.getLogger(__name__)
+
+
+class AreaUnit(IntEnum):
+    """Area unit."""
+
+    Sqm = 0
+    Sqft = 1
+    Ping = 2
 
 
 @dataclass
@@ -44,18 +54,41 @@ class Record(DataClassDictMixin):
     }
     """
 
-    #: Error code from cleaning
-    error: int
     #: Total time cleaned (in minutes)
-    clean_time: int
-    #: Total area cleaned (in sqm?)
+    clean_time: timedelta = field(
+        metadata=field_options(lambda x: timedelta(minutes=x))
+    )
+    #: Total area cleaned
     clean_area: int
     dust_collection: bool
-    timestamp: datetime
+    timestamp: datetime = field(
+        metadata=field_options(
+            deserialize=lambda x: datetime.fromtimestamp(x) if x else None
+        )
+    )
+    info_num: int | None = None
+    message: int | None = None
+    map_id: int | None = None
+    start_type: int | None = None
+    task_type: int | None = None
+    record_index: int | None = None
 
-    start_type: int
-    task_type: int
-    record_index: int
+    #: Error code from cleaning
+    error: int = field(default=0)
+
+
+class LatestClean(SerializationStrategy):
+    """Strategy to deserialize list of maps into a dict."""
+
+    def deserialize(self, value: list[int]) -> Record:
+        """Deserialize list of maps into a dict."""
+        data = {
+            "timestamp": value[0],
+            "clean_time": value[1],
+            "clean_area": value[2],
+            "dust_collection": value[3],
+        }
+        return Record.from_dict(data)
 
 
 @dataclass
@@ -79,20 +112,29 @@ class Records(DataClassDictMixin):
     }
     """
 
-    total_time: int
+    total_time: timedelta = field(
+        metadata=field_options(lambda x: timedelta(minutes=x))
+    )
     total_area: int
-    total_number: int
-    record_list_num: int
-    record_list: list[Record]
-    # TODO: conversion from list to dict/basemodel input TBD
-    # latest_clean: LatestRecord = Field(alias="lastest_day_record"))
+    total_count: int = field(metadata=field_options(alias="total_number"))
+
+    records: list[Record] = field(metadata=field_options(alias="record_list"))
+    latest_clean: Record = field(
+        metadata=field_options(
+            serialization_strategy=LatestClean(), alias="lastest_day_record"
+        )
+    )
 
 
 class VacuumRecords(SmartModule):
     """Implementation of vacuum cleaning records."""
 
-    REQUIRED_COMPONENT = "consumables"
-    QUERY_GETTER_NAME = "getCleanRecords"
+    REQUIRED_COMPONENT = "clean_percent"
+    _parsed_data: Records
+
+    async def _post_update_hook(self) -> None:
+        """Cache parsed data after an update."""
+        self._parsed_data = Records.from_dict(self.data["getCleanRecords"])
 
     def _initialize_features(self) -> None:
         """Initialize features."""
@@ -103,7 +145,7 @@ class VacuumRecords(SmartModule):
                 name="Total area cleaned",
                 container=self,
                 attribute_getter="total_clean_area",
-                unit_getter=lambda: "sqm",
+                unit_getter="area_unit",
                 category=Feature.Category.Info,
                 type=Feature.Type.Sensor,
             )
@@ -115,6 +157,7 @@ class VacuumRecords(SmartModule):
                 name="Total time cleaned",
                 container=self,
                 attribute_getter="total_clean_time",
+                unit_getter=lambda: "min",  # ha-friendly unit, see UnitOfTime.MINUTES
                 category=Feature.Category.Info,
                 type=Feature.Type.Sensor,
             )
@@ -131,17 +174,49 @@ class VacuumRecords(SmartModule):
             )
         )
 
+    def query(self) -> dict:
+        """Query to execute during the update cycle."""
+        return {
+            "getCleanRecords": {},
+            "getAreaUnit": {},
+        }
+
     @property
     def total_clean_area(self) -> int:
         """Return total cleaning area."""
-        return self.data["total_area"]
+        return self._parsed_data.total_area
 
     @property
-    def total_clean_time(self) -> int:
+    def total_clean_time(self) -> timedelta:
         """Return total cleaning time."""
-        return self.data["total_time"]
+        return self._parsed_data.total_time
 
     @property
     def total_clean_count(self) -> int:
         """Return total clean count."""
-        return self.data["total_number"]
+        return self._parsed_data.total_count
+
+    @property
+    def latest_clean_area(self) -> int:
+        """Return latest cleaning area."""
+        return self._parsed_data.latest_clean.clean_area
+
+    @property
+    def latest_clean_time(self) -> timedelta:
+        """Return total cleaning time."""
+        return self._parsed_data.latest_clean.clean_time
+
+    @property
+    def latest_clean_timestamp(self) -> datetime:
+        """Return latest cleaning timestamp."""
+        return self._parsed_data.latest_clean.timestamp
+
+    @property
+    def area_unit(self) -> AreaUnit:
+        """Return area unit."""
+        return AreaUnit(self.data["getAreaUnit"]["area_unit"])
+
+    @property
+    def parsed_data(self) -> Records:
+        """Return parsed records data."""
+        return self._parsed_data
