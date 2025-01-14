@@ -64,9 +64,12 @@ HSV(hue=180, saturation=100, value=80)
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Annotated, NamedTuple
+from typing import Annotated, Any, NamedTuple
+from warnings import warn
 
+from ..exceptions import KasaException
 from ..module import FeatureAttribute, Module
 
 
@@ -99,34 +102,6 @@ class HSV(NamedTuple):
 
 class Light(Module, ABC):
     """Base class for TP-Link Light."""
-
-    @property
-    @abstractmethod
-    def is_dimmable(self) -> bool:
-        """Whether the light supports brightness changes."""
-
-    @property
-    @abstractmethod
-    def is_color(self) -> bool:
-        """Whether the bulb supports color changes."""
-
-    @property
-    @abstractmethod
-    def is_variable_color_temp(self) -> bool:
-        """Whether the bulb supports color temperature changes."""
-
-    @property
-    @abstractmethod
-    def valid_temperature_range(self) -> ColorTempRange:
-        """Return the device-specific white temperature range (in Kelvin).
-
-        :return: White temperature range in Kelvin (minimum, maximum)
-        """
-
-    @property
-    @abstractmethod
-    def has_effects(self) -> bool:
-        """Return True if the device supports effects."""
 
     @property
     @abstractmethod
@@ -197,3 +172,42 @@ class Light(Module, ABC):
     @abstractmethod
     async def set_state(self, state: LightState) -> dict:
         """Set the light state."""
+
+    def _deprecated_valid_temperature_range(self) -> ColorTempRange:
+        if not (temp := self.get_feature("color_temp")):
+            raise KasaException("Color temperature not supported")
+        return ColorTempRange(temp.minimum_value, temp.maximum_value)
+
+    def _deprecated_attributes(self, dep_name: str) -> Callable | None:
+        map: dict[str, Callable] = {
+            "is_color": self.set_hsv,
+            "is_dimmable": self.set_brightness,
+            "is_variable_color_temp": self.set_color_temp,
+        }
+        return map.get(dep_name)
+
+    def __getattr__(self, name: str) -> Any:
+        if name == "valid_temperature_range":
+            res = self._deprecated_valid_temperature_range()
+            msg = (
+                "valid_temperature_range is deprecated, use "
+                "get_feature(self.set_color_temp) minimum_value "
+                " and maximum_value instead"
+            )
+            warn(msg, DeprecationWarning, stacklevel=2)
+            return res
+
+        if name == "has_effects":
+            msg = (
+                "has_effects is deprecated, use Module.LightEffect "
+                "in device.modules instead"
+            )
+            warn(msg, DeprecationWarning, stacklevel=2)
+            return Module.LightEffect in self._device.modules
+
+        if attr := self._deprecated_attributes(name):
+            msg = f"{name} is deprecated, use has_feature({attr}) instead"
+            warn(msg, DeprecationWarning, stacklevel=2)
+            return self.has_feature(attr)
+
+        raise AttributeError(f"Energy module has no attribute {name!r}")

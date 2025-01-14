@@ -7,7 +7,7 @@ from typing import Annotated
 
 from ...exceptions import KasaException
 from ...feature import Feature
-from ...interfaces.light import HSV, ColorTempRange, LightState
+from ...interfaces.light import HSV, LightState
 from ...interfaces.light import Light as LightInterface
 from ...module import FeatureAttribute, Module
 from ..smartmodule import SmartModule
@@ -35,32 +35,6 @@ class Light(SmartModule, LightInterface):
         return {}
 
     @property
-    def is_color(self) -> bool:
-        """Whether the bulb supports color changes."""
-        return Module.Color in self._device.modules
-
-    @property
-    def is_dimmable(self) -> bool:
-        """Whether the bulb supports brightness changes."""
-        return Module.Brightness in self._device.modules
-
-    @property
-    def is_variable_color_temp(self) -> bool:
-        """Whether the bulb supports color temperature changes."""
-        return Module.ColorTemperature in self._device.modules
-
-    @property
-    def valid_temperature_range(self) -> ColorTempRange:
-        """Return the device-specific white temperature range (in Kelvin).
-
-        :return: White temperature range in Kelvin (minimum, maximum)
-        """
-        if Module.ColorTemperature not in self._device.modules:
-            raise KasaException("Color temperature not supported")
-
-        return self._device.modules[Module.ColorTemperature].valid_temperature_range
-
-    @property
     def hsv(self) -> Annotated[HSV, FeatureAttribute()]:
         """Return the current HSV state of the bulb.
 
@@ -82,7 +56,7 @@ class Light(SmartModule, LightInterface):
     @property
     def brightness(self) -> Annotated[int, FeatureAttribute()]:
         """Return the current brightness in percentage."""
-        if Module.Brightness not in self._device.modules:
+        if Module.Brightness not in self._device.modules:  # pragma: no cover
             raise KasaException("Bulb is not dimmable.")
 
         return self._device.modules[Module.Brightness].brightness
@@ -135,15 +109,10 @@ class Light(SmartModule, LightInterface):
         :param int brightness: brightness in percent
         :param int transition: transition in milliseconds.
         """
-        if Module.Brightness not in self._device.modules:
+        if Module.Brightness not in self._device.modules:  # pragma: no cover
             raise KasaException("Bulb is not dimmable.")
 
         return await self._device.modules[Module.Brightness].set_brightness(brightness)
-
-    @property
-    def has_effects(self) -> bool:
-        """Return True if the device supports effects."""
-        return Module.LightEffect in self._device.modules
 
     async def set_state(self, state: LightState) -> dict:
         """Set the light state."""

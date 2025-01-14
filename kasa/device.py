@@ -107,7 +107,7 @@ from __future__ import annotations
 
 import logging
 from abc import ABC, abstractmethod
-from collections.abc import Mapping, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
 from datetime import datetime, tzinfo
 from typing import TYPE_CHECKING, Any, TypeAlias
@@ -537,10 +537,47 @@ class Device(ABC):
 
         return None
 
+    def _get_deprecated_callable_attribute(self, name: str) -> Any | None:
+        vals: dict[str, tuple[ModuleName, Callable[[Any], Any], str]] = {
+            "is_dimmable": (
+                Module.Light,
+                lambda c: c.has_feature("brightness"),
+                "light_module.has_feature('brightness')",
+            ),
+            "is_color": (
+                Module.Light,
+                lambda c: c.has_feature("hsv"),
+                "light_module.has_feature('hsv')",
+            ),
+            "is_variable_color_temp": (
+                Module.Light,
+                lambda c: c.has_feature("color_temp"),
+                "light_module.has_feature('color_temp')",
+            ),
+            "valid_temperature_range": (
+                Module.Light,
+                lambda c: c._deprecated_valid_temperature_range(),
+                "minimum and maximum value of get_feature('color_temp')",
+            ),
+            "has_effects": (
+                Module.Light,
+                lambda c: Module.LightEffect in c._device.modules,
+                "Module.LightEffect in c._device.modules",
+            ),
+        }
+        if mod_call_msg := vals.get(name):
+            mod, call, msg = mod_call_msg
+            msg = f"{name} is deprecated, use: {msg} instead"
+            warn(msg, DeprecationWarning, stacklevel=2)
+            if (module := self.modules.get(mod)) is None:
+                raise AttributeError(f"Device has no attribute {name!r}")
+            return call(module)
+
+        return None
+
     _deprecated_other_attributes = {
         # light attributes
         "is_color": (Module.Light, ["is_color"]),
-        "is_dimmable": (Module.Light, ["is_dimmable"]),
         "is_variable_color_temp": (Module.Light, ["is_variable_color_temp"]),
         "brightness": (Module.Light, ["brightness"]),
         "set_brightness": (Module.Light, ["set_brightness"]),
@@ -548,8 +585,6 @@ class Device(ABC):
         "set_hsv": (Module.Light, ["set_hsv"]),
         "color_temp": (Module.Light, ["color_temp"]),
         "set_color_temp": (Module.Light, ["set_color_temp"]),
-        "valid_temperature_range": (Module.Light, ["valid_temperature_range"]),
-        "has_effects": (Module.Light, ["has_effects"]),
         "_deprecated_set_light_state": (Module.Light, ["has_effects"]),
         # led attributes
         "led": (Module.Led, ["led"]),
@@ -588,6 +623,9 @@ class Device(ABC):
                 msg = f"{name} is deprecated, use device_type property instead"
                 warn(msg, DeprecationWarning, stacklevel=2)
                 return self.device_type == dep_device_type_attr[1]
+            # callable
+            if (result := self._get_deprecated_callable_attribute(name)) is not None:
+                return result
             # Other deprecated attributes
             if (dep_attr := self._deprecated_other_attributes.get(name)) and (
                 (replacing_attr := self._get_replacing_attr(dep_attr[0], *dep_attr[1]))

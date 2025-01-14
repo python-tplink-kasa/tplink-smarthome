@@ -21,3 +21,6 @@ class Fan(Module, ABC):
         self, level: int
     ) -> Annotated[dict, FeatureAttribute()]:
         """Set fan speed level."""
+
+
+Fan.get_fan_speed_level = Fan.fan_speed_level.fget  # type: ignore[attr-defined]
