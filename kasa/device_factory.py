@@ -205,11 +205,11 @@ def get_protocol(config: DeviceConfig, *, strict: bool = False) -> BaseProtocol 
         return IotProtocol(transport=LinkieTransportV2(config=config))
 
     # Older FW used a different transport
+    if ctype.device_family is DeviceFamily.SmartTapoRobovac:
         if strict and ctype.encryption_type is not DeviceEncryptionType.Aes:
             return None
-        and ctype.encryption_type is DeviceEncryptionType.Aes
-    ):
-        return SmartProtocol(transport=SslTransport(config=config))
+        if ctype.encryption_type is DeviceEncryptionType.Aes:
+            return SmartProtocol(transport=SslTransport(config=config))
 
     protocol_transport_key = (
         protocol_name
