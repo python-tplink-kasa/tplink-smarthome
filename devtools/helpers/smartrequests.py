@@ -439,6 +439,8 @@ COMPONENT_REQUESTS = {
     "clean": [
         SmartRequest.get_raw_request("getCleanRecords"),
         SmartRequest.get_raw_request("getVacStatus"),
+        SmartRequest.get_raw_request("getAreaUnit"),
+        SmartRequest.get_raw_request("getCleanInfo"),
         SmartRequest.get_raw_request("getCleanStatus"),
         SmartRequest("getCleanAttr", SmartRequest.GetCleanAttrParams()),
     ],

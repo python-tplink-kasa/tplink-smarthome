@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from datetime import timedelta
 from enum import IntEnum
 from typing import Annotated
 
@@ -52,6 +53,17 @@ class FanSpeed(IntEnum):
     Standard = 2
     Turbo = 3
     Max = 4
+
+
+class AreaUnit(IntEnum):
+    """Area unit."""
+
+    #: Square meter
+    Sqm = 0
+    #: Square feet
+    Sqft = 1
+    #: Taiwanese unit: https://en.wikipedia.org/wiki/Taiwanese_units_of_measurement#Area
+    Ping = 2
 
 
 class Clean(SmartModule):
@@ -145,6 +157,41 @@ class Clean(SmartModule):
                 type=Feature.Type.Choice,
             )
         )
+        self._add_feature(
+            Feature(
+                self._device,
+                id="clean_area",
+                name="Cleaning area",
+                container=self,
+                attribute_getter="clean_area",
+                unit_getter="area_unit",
+                category=Feature.Category.Info,
+                type=Feature.Type.Sensor,
+            )
+        )
+        self._add_feature(
+            Feature(
+                self._device,
+                id="clean_time",
+                name="Cleaning time",
+                container=self,
+                attribute_getter="clean_time",
+                category=Feature.Category.Info,
+                type=Feature.Type.Sensor,
+            )
+        )
+        self._add_feature(
+            Feature(
+                self._device,
+                id="clean_progress",
+                name="Cleaning progress",
+                container=self,
+                attribute_getter="clean_progress",
+                unit_getter=lambda: "%",
+                category=Feature.Category.Info,
+                type=Feature.Type.Sensor,
+            )
+        )
 
     async def _post_update_hook(self) -> None:
         """Set error code after update."""
@@ -171,9 +218,11 @@ class Clean(SmartModule):
     def query(self) -> dict:
         """Query to execute during the update cycle."""
         return {
-            "getVacStatus": None,
-            "getBatteryInfo": None,
-            "getCleanStatus": None,
+            "getVacStatus": {},
+            "getCleanInfo": {},
+            "getAreaUnit": {},
+            "getBatteryInfo": {},
+            "getCleanStatus": {},
             "getCleanAttr": {"type": "global"},
         }
 
@@ -249,6 +298,11 @@ class Clean(SmartModule):
         return self.data["getVacStatus"]
 
     @property
+    def _info(self) -> dict:
+        """Return current cleaning info."""
+        return self.data["getCleanInfo"]
+
+    @property
     def _settings(self) -> dict:
         """Return cleaning settings."""
         return self.data["getCleanAttr"]
@@ -265,3 +319,23 @@ class Clean(SmartModule):
         except ValueError:
             _LOGGER.warning("Got unknown status code: %s (%s)", status_code, self.data)
             return Status.UnknownInternal
+
+    @property
+    def area_unit(self) -> AreaUnit:
+        """Return area unit."""
+        return AreaUnit(self.data["getAreaUnit"]["area_unit"])
+
+    @property
+    def clean_area(self) -> int:
+        """Return currently cleaned area."""
+        return self._info["clean_area"]
+
+    @property
+    def clean_time(self) -> timedelta:
+        """Return current cleaning time."""
+        return timedelta(minutes=self._info["clean_time"])
+
+    @property
+    def clean_progress(self) -> int:
+        """Return amount of currently cleaned area."""
+        return self._info["clean_percent"]

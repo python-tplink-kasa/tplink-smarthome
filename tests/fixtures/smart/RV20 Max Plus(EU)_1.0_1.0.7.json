@@ -159,7 +159,9 @@
     "getBatteryInfo": {
         "battery_percentage": 75
     },
+    "getAreaUnit": {"area_unit": 0},
     "getCleanAttr": {"suction": 2, "cistern": 2, "clean_number": 1},
+    "getCleanInfo": {"clean_time": 5, "clean_area": 5, "clean_percent": 1},
     "getCleanStatus": {"getCleanStatus": {"clean_status": 0, "is_working": false, "is_mapping": false, "is_relocating": false}},
     "getCleanRecords": {
         "lastest_day_record": [
