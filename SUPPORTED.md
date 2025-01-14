@@ -283,6 +283,8 @@ All Tapo devices require authentication.<br>Hub-Connected Devices may work acros
   - Hardware: 1.0 (US) / Firmware: 1.2.8
 - **C720**
   - Hardware: 1.0 (US) / Firmware: 1.2.3
+- **D130**
+  - Hardware: 1.0 (US) / Firmware: 1.1.9
 - **TC65**
   - Hardware: 1.0 / Firmware: 1.3.9
 - **TC70**
@@ -300,6 +302,8 @@ All Tapo devices require authentication.<br>Hub-Connected Devices may work acros
 
 ### Hub-Connected Devices
 
+- **D100C**
+  - Hardware: 1.0 / Firmware: 1.1.3
 - **S200B**
   - Hardware: 1.0 (EU) / Firmware: 1.11.0
   - Hardware: 1.0 (US) / Firmware: 1.12.0

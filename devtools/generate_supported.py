@@ -39,6 +39,7 @@ DEVICE_TYPE_TO_PRODUCT_GROUP = {
     DeviceType.Hub: "Hubs",
     DeviceType.Sensor: "Hub-Connected Devices",
     DeviceType.Thermostat: "Hub-Connected Devices",
+    DeviceType.Chime: "Hub-Connected Devices",
 }
 
 

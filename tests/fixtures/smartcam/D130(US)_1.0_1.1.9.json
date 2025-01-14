@@ -1,0 +1,959 @@
+{
+    "getAlertConfig": {
+        "msg_alarm": {
+            "capability": {
+                "alarm_duration_support": "1",
+                "alarm_volume_support": "1",
+                "alert_event_type_support": "1",
+                "usr_def_audio_alarm_max_num": "15",
+                "usr_def_audio_alarm_support": "1",
+                "usr_def_audio_max_duration": "15",
+                "usr_def_audio_type": "0",
+                "usr_def_start_file_id": "8195"
+            },
+            "chn1_msg_alarm_info": {
+                "alarm_duration": "0",
+                "alarm_mode": [
+                    "light",
+                    "sound"
+                ],
+                "alarm_type": "0",
+                "alarm_volume": "high",
+                "enabled": "off",
+                "light_alarm_enabled": "on",
+                "light_type": "1",
+                "sound_alarm_enabled": "on"
+            },
+            "usr_def_audio": []
+        }
+    },
+    "getAlertPlan": {
+        "msg_alarm_plan": {
+            "chn1_msg_alarm_plan": {
+                "alarm_plan_1": "0000-0000,127",
+                "enabled": "off"
+            }
+        }
+    },
+    "getAlertTypeList": {
+        "msg_alarm": {
+            "alert_type": {
+                "alert_type_list": [
+                    "Siren",
+                    "Tone"
+                ]
+            }
+        }
+    },
+    "getAppComponentList": {
+        "app_component": {
+            "app_component_list": [
+                {
+                    "name": "sdCard",
+                    "version": 1
+                },
+                {
+                    "name": "timezone",
+                    "version": 1
+                },
+                {
+                    "name": "system",
+                    "version": 3
+                },
+                {
+                    "name": "led",
+                    "version": 2
+                },
+                {
+                    "name": "playback",
+                    "version": 6
+                },
+                {
+                    "name": "detection",
+                    "version": 3
+                },
+                {
+                    "name": "firmware",
+                    "version": 2
+                },
+                {
+                    "name": "account",
+                    "version": 1
+                },
+                {
+                    "name": "quickSetup",
+                    "version": 1
+                },
+                {
+                    "name": "video",
+                    "version": 3
+                },
+                {
+                    "name": "lensMask",
+                    "version": 2
+                },
+                {
+                    "name": "lightFrequency",
+                    "version": 1
+                },
+                {
+                    "name": "dayNightMode",
+                    "version": 1
+                },
+                {
+                    "name": "osd",
+                    "version": 3
+                },
+                {
+                    "name": "record",
+                    "version": 1
+                },
+                {
+                    "name": "videoRotation",
+                    "version": 1
+                },
+                {
+                    "name": "audio",
+                    "version": 3
+                },
+                {
+                    "name": "diagnose",
+                    "version": 1
+                },
+                {
+                    "name": "msgPush",
+                    "version": 3
+                },
+                {
+                    "name": "linecrossingDetection",
+                    "version": 2
+                },
+                {
+                    "name": "deviceShare",
+                    "version": 1
+                },
+                {
+                    "name": "tamperDetection",
+                    "version": 1
+                },
+                {
+                    "name": "tapoCare",
+                    "version": 1
+                },
+                {
+                    "name": "blockZone",
+                    "version": 1
+                },
+                {
+                    "name": "personDetection",
+                    "version": 2
+                },
+                {
+                    "name": "needSubscriptionServiceList",
+                    "version": 1
+                },
+                {
+                    "name": "nightVisionMode",
+                    "version": 3
+                },
+                {
+                    "name": "vehicleDetection",
+                    "version": 1
+                },
+                {
+                    "name": "petDetection",
+                    "version": 1
+                },
+                {
+                    "name": "packageDetection",
+                    "version": 3
+                },
+                {
+                    "name": "detectionRegion",
+                    "version": 2
+                },
+                {
+                    "name": "markerBox",
+                    "version": 1
+                },
+                {
+                    "name": "whiteLamp",
+                    "version": 1
+                },
+                {
+                    "name": "nvmp",
+                    "version": 1
+                },
+                {
+                    "name": "iotCloud",
+                    "version": 1
+                },
+                {
+                    "name": "quickResponse",
+                    "version": 1
+                },
+                {
+                    "name": "ldc",
+                    "version": 1
+                },
+                {
+                    "name": "upnpc",
+                    "version": 2
+                },
+                {
+                    "name": "chimeCtrl",
+                    "version": 1
+                },
+                {
+                    "name": "ring",
+                    "version": 3
+                },
+                {
+                    "name": "recordDownload",
+                    "version": 1
+                },
+                {
+                    "name": "staticIp",
+                    "version": 2
+                }
+            ]
+        }
+    },
+    "getAudioConfig": {
+        "audio_config": {
+            "microphone": {
+                "bitrate": "64",
+                "channels": "1",
+                "echo_cancelling": "off",
+                "encode_type": "G711alaw",
+                "input_device_type": "MicIn",
+                "mute": "off",
+                "noise_cancelling": "on",
+                "sampling_rate": "8",
+                "volume": "80"
+            },
+            "speaker": {
+                "mute": "off",
+                "output_device_type": "SpeakerOut",
+                "volume": "80"
+            }
+        }
+    },
+    "getCircularRecordingConfig": {
+        "harddisk_manage": {
+            "harddisk": {
+                "loop": "on"
+            }
+        }
+    },
+    "getClockStatus": {
+        "system": {
+            "clock_status": {
+                "local_time": "2025-01-09 08:38:30",
+                "seconds_from_1970": 1736433510
+            }
+        }
+    },
+    "getConnectStatus": {
+        "onboarding": {
+            "get_connect_status": {
+                "status": 0
+            }
+        }
+    },
+    "getConnectionType": {
+        "link_type": "wifi",
+        "rssi": "4",
+        "rssiValue": -46,
+        "ssid": "I01BU0tFRF9TU0lEIw=="
+    },
+    "getDetectionConfig": {
+        "motion_detection": {
+            "motion_det": {
+                "digital_sensitivity": "60",
+                "enabled": "off",
+                "non_vehicle_enabled": "off",
+                "people_enabled": "off",
+                "sensitivity": "medium",
+                "vehicle_enabled": "off"
+            }
+        }
+    },
+    "getDeviceInfo": {
+        "device_info": {
+            "basic_info": {
+                "avatar": "camera d130",
+                "barcode": "",
+                "dev_id": "0000000000000000000000000000000000000000",
+                "device_alias": "#MASKED_NAME#",
+                "device_info": "D130 1.0 IPC",
+                "device_model": "D130",
+                "device_name": "#MASKED_NAME#",
+                "device_type": "SMART.TAPODOORBELL",
+                "features": 3,
+                "ffs": false,
+                "has_set_location_info": 1,
+                "hw_desc": "00000000000000000000000000000000",
+                "hw_id": "00000000000000000000000000000000",
+                "hw_version": "1.0",
+                "is_cal": true,
+                "latitude": 0,
+                "longitude": 0,
+                "mac": "40-AE-30-00-00-00",
+                "manufacturer_name": "TP-LINK",
+                "mobile_access": "0",
+                "no_rtsp_constrain": 1,
+                "oem_id": "00000000000000000000000000000000",
+                "region": "US",
+                "sw_version": "1.1.9 Build 240716 Rel.51615n"
+            }
+        }
+    },
+    "getFirmwareAutoUpgradeConfig": {
+        "auto_upgrade": {
+            "common": {
+                "enabled": "off",
+                "random_range": "120",
+                "time": "15:00"
+            }
+        }
+    },
+    "getFirmwareUpdateStatus": {
+        "cloud_config": {
+            "upgrade_status": {
+                "lastUpgradingSuccess": true,
+                "state": "normal"
+            }
+        }
+    },
+    "getLastAlarmInfo": {
+        "system": {
+            "last_alarm_info": {
+                "last_alarm_time": "1736432241",
+                "last_alarm_type": "motion"
+            }
+        }
+    },
+    "getLdc": {
+        "image": {
+            "common": {
+                "area_compensation": "default",
+                "auto_exp_antiflicker": "off",
+                "auto_exp_gain_max": "0",
+                "backlight": "off",
+                "chroma": "50",
+                "contrast": "50",
+                "dehaze": "off",
+                "eis": "off",
+                "exp_gain": "100",
+                "exp_level": "0",
+                "exp_type": "auto",
+                "focus_limited": "10",
+                "focus_type": "manual",
+                "high_light_compensation": "off",
+                "inf_delay": "5",
+                "inf_end_time": "21600",
+                "inf_sensitivity": "4",
+                "inf_sensitivity_day2night": "1400",
+                "inf_sensitivity_night2day": "9100",
+                "inf_start_time": "64800",
+                "inf_type": "auto",
+                "iris_level": "160",
+                "light_freq_mode": "auto",
+                "lock_blue_colton": "0",
+                "lock_blue_gain": "0",
+                "lock_gb_gain": "0",
+                "lock_gr_gain": "0",
+                "lock_green_colton": "0",
+                "lock_red_colton": "0",
+                "lock_red_gain": "0",
+                "lock_source": "local",
+                "luma": "50",
+                "saturation": "50",
+                "sharpness": "50",
+                "shutter": "1/25",
+                "smartir": "auto_ir",
+                "smartir_level": "0",
+                "smartwtl": "auto_wtl",
+                "smartwtl_digital_level": "50",
+                "smartwtl_level": "3",
+                "style": "standard",
+                "wb_B_gain": "50",
+                "wb_G_gain": "50",
+                "wb_R_gain": "50",
+                "wb_type": "auto",
+                "wd_gain": "50",
+                "wide_dynamic": "off",
+                "wtl_delay": "5",
+                "wtl_end_time": "21600",
+                "wtl_sensitivity": "4",
+                "wtl_sensitivity_day2night": "1400",
+                "wtl_sensitivity_night2day": "9100",
+                "wtl_start_time": "64800",
+                "wtl_type": "auto"
+            },
+            "switch": {
+                "best_view_distance": "0",
+                "clear_licence_plate_mode": "off",
+                "flip_type": "off",
+                "full_color_min_keep_time": "30",
+                "full_color_people_enhance": "off",
+                "image_scene_mode": "normal",
+                "image_scene_mode_autoday": "normal",
+                "image_scene_mode_autonight": "normal",
+                "image_scene_mode_common": "normal",
+                "image_scene_mode_shedday": "normal",
+                "image_scene_mode_shednight": "normal",
+                "ldc": "on",
+                "night_vision_mode": "inf_night_vision",
+                "overexposure_people_suppression": "off",
+                "rotate_type": "off",
+                "schedule_end_time": "64800",
+                "schedule_start_time": "21600",
+                "switch_mode": "common",
+                "wtl_force_time": "300",
+                "wtl_intensity_level": "3"
+            }
+        }
+    },
+    "getLedStatus": {
+        "led": {
+            "config": {
+                "enabled": "auto"
+            }
+        }
+    },
+    "getLensMaskConfig": {
+        "lens_mask": {
+            "lens_mask_info": {
+                "enabled": "off"
+            }
+        }
+    },
+    "getLightFrequencyInfo": {
+        "image": {
+            "common": {
+                "area_compensation": "default",
+                "auto_exp_antiflicker": "off",
+                "auto_exp_gain_max": "0",
+                "backlight": "off",
+                "chroma": "50",
+                "contrast": "50",
+                "dehaze": "off",
+                "eis": "off",
+                "exp_gain": "100",
+                "exp_level": "0",
+                "exp_type": "auto",
+                "focus_limited": "10",
+                "focus_type": "manual",
+                "high_light_compensation": "off",
+                "inf_delay": "5",
+                "inf_end_time": "21600",
+                "inf_sensitivity": "4",
+                "inf_sensitivity_day2night": "1400",
+                "inf_sensitivity_night2day": "9100",
+                "inf_start_time": "64800",
+                "inf_type": "auto",
+                "iris_level": "160",
+                "light_freq_mode": "auto",
+                "lock_blue_colton": "0",
+                "lock_blue_gain": "0",
+                "lock_gb_gain": "0",
+                "lock_gr_gain": "0",
+                "lock_green_colton": "0",
+                "lock_red_colton": "0",
+                "lock_red_gain": "0",
+                "lock_source": "local",
+                "luma": "50",
+                "saturation": "50",
+                "sharpness": "50",
+                "shutter": "1/25",
+                "smartir": "auto_ir",
+                "smartir_level": "0",
+                "smartwtl": "auto_wtl",
+                "smartwtl_digital_level": "50",
+                "smartwtl_level": "3",
+                "style": "standard",
+                "wb_B_gain": "50",
+                "wb_G_gain": "50",
+                "wb_R_gain": "50",
+                "wb_type": "auto",
+                "wd_gain": "50",
+                "wide_dynamic": "off",
+                "wtl_delay": "5",
+                "wtl_end_time": "21600",
+                "wtl_sensitivity": "4",
+                "wtl_sensitivity_day2night": "1400",
+                "wtl_sensitivity_night2day": "9100",
+                "wtl_start_time": "64800",
+                "wtl_type": "auto"
+            }
+        }
+    },
+    "getMediaEncrypt": {
+        "cet": {
+            "media_encrypt": {
+                "enabled": "on"
+            }
+        }
+    },
+    "getMsgPushConfig": {
+        "msg_push": {
+            "chn1_msg_push_info": {
+                "notification_enabled": "on",
+                "rich_notification_enabled": "off"
+            }
+        }
+    },
+    "getNightVisionCapability": {
+        "image_capability": {
+            "supplement_lamp": {
+                "night_vision_mode_range": [
+                    "inf_night_vision",
+                    "md_night_vision",
+                    "dbl_night_vision"
+                ],
+                "supplement_lamp_type": [
+                    "infrared_lamp",
+                    "white_lamp"
+                ]
+            }
+        }
+    },
+    "getNightVisionModeConfig": {
+        "image": {
+            "switch": {
+                "best_view_distance": "0",
+                "clear_licence_plate_mode": "off",
+                "flip_type": "off",
+                "full_color_min_keep_time": "30",
+                "full_color_people_enhance": "off",
+                "image_scene_mode": "normal",
+                "image_scene_mode_autoday": "normal",
+                "image_scene_mode_autonight": "normal",
+                "image_scene_mode_common": "normal",
+                "image_scene_mode_shedday": "normal",
+                "image_scene_mode_shednight": "normal",
+                "ldc": "on",
+                "night_vision_mode": "inf_night_vision",
+                "overexposure_people_suppression": "off",
+                "rotate_type": "off",
+                "schedule_end_time": "64800",
+                "schedule_start_time": "21600",
+                "switch_mode": "common",
+                "wtl_force_time": "300",
+                "wtl_intensity_level": "3"
+            }
+        }
+    },
+    "getPersonDetectionConfig": {
+        "people_detection": {
+            "detection": {
+                "enabled": "on",
+                "sensitivity": "60"
+            }
+        }
+    },
+    "getPetDetectionConfig": {
+        "pet_detection": {
+            "detection": {
+                "enabled": "off",
+                "sensitivity": "60"
+            }
+        }
+    },
+    "getRecordPlan": {
+        "record_plan": {
+            "chn1_channel": {
+                "enabled": "on",
+                "friday": "[\"0000-2400:2\"]",
+                "monday": "[\"0000-2400:2\"]",
+                "saturday": "[\"0000-2400:2\"]",
+                "sunday": "[\"0000-2400:2\"]",
+                "thursday": "[\"0000-2400:2\"]",
+                "tuesday": "[\"0000-2400:2\"]",
+                "wednesday": "[\"0000-2400:2\"]"
+            }
+        }
+    },
+    "getRotationStatus": {
+        "image": {
+            "switch": {
+                "best_view_distance": "0",
+                "clear_licence_plate_mode": "off",
+                "flip_type": "off",
+                "full_color_min_keep_time": "30",
+                "full_color_people_enhance": "off",
+                "image_scene_mode": "normal",
+                "image_scene_mode_autoday": "normal",
+                "image_scene_mode_autonight": "normal",
+                "image_scene_mode_common": "normal",
+                "image_scene_mode_shedday": "normal",
+                "image_scene_mode_shednight": "normal",
+                "ldc": "on",
+                "night_vision_mode": "inf_night_vision",
+                "overexposure_people_suppression": "off",
+                "rotate_type": "off",
+                "schedule_end_time": "64800",
+                "schedule_start_time": "21600",
+                "switch_mode": "common",
+                "wtl_force_time": "300",
+                "wtl_intensity_level": "3"
+            }
+        }
+    },
+    "getSdCardStatus": {
+        "harddisk_manage": {
+            "hd_info": [
+                {
+                    "hd_info_1": {
+                        "crossline_free_space": "0B",
+                        "crossline_free_space_accurate": "0B",
+                        "crossline_total_space": "0B",
+                        "crossline_total_space_accurate": "0B",
+                        "detect_status": "normal",
+                        "disk_name": "1",
+                        "free_space": "0B",
+                        "free_space_accurate": "0B",
+                        "loop_record_status": "1",
+                        "msg_push_free_space": "0B",
+                        "msg_push_free_space_accurate": "0B",
+                        "msg_push_total_space": "0B",
+                        "msg_push_total_space_accurate": "0B",
+                        "percent": "0",
+                        "picture_free_space": "0B",
+                        "picture_free_space_accurate": "0B",
+                        "picture_total_space": "0B",
+                        "picture_total_space_accurate": "0B",
+                        "record_duration": "0",
+                        "record_free_duration": "0",
+                        "record_start_time": "1723813993",
+                        "rw_attr": "rw",
+                        "status": "normal",
+                        "total_space": "119.1GB",
+                        "total_space_accurate": "127878135808B",
+                        "type": "local",
+                        "video_free_space": "0B",
+                        "video_free_space_accurate": "0B",
+                        "video_total_space": "114.3GB",
+                        "video_total_space_accurate": "122675003392B",
+                        "write_protect": "0"
+                    }
+                }
+            ]
+        }
+    },
+    "getTamperDetectionConfig": {
+        "tamper_detection": {
+            "tamper_det": {
+                "digital_sensitivity": "50",
+                "enabled": "off",
+                "sensitivity": "medium"
+            }
+        }
+    },
+    "getTimezone": {
+        "system": {
+            "basic": {
+                "timezone": "UTC-06:00",
+                "timing_mode": "ntp",
+                "zone_id": "America/Chicago"
+            }
+        }
+    },
+    "getVehicleDetectionConfig": {
+        "vehicle_detection": {
+            "detection": {
+                "enabled": "off",
+                "sensitivity": "60"
+            }
+        }
+    },
+    "getVideoCapability": {
+        "video_capability": {
+            "main": {
+                "bitrate_types": [
+                    "cbr",
+                    "vbr"
+                ],
+                "bitrates": [
+                    "256",
+                    "512",
+                    "1024",
+                    "1536",
+                    "2048",
+                    "2560",
+                    "3072"
+                ],
+                "change_fps_support": "1",
+                "encode_types": [
+                    "H264",
+                    "H265"
+                ],
+                "frame_rates": [
+                    "65551",
+                    "65556",
+                    "65561",
+                    "65566"
+                ],
+                "minor_stream_support": "1",
+                "qualitys": [
+                    "1",
+                    "3",
+                    "5"
+                ],
+                "resolutions": [
+                    "2560*1920"
+                ]
+            }
+        }
+    },
+    "getVideoQualities": {
+        "video": {
+            "main": {
+                "bitrate": "3072",
+                "bitrate_type": "vbr",
+                "default_bitrate": "3072",
+                "encode_type": "H264",
+                "frame_rate": "65551",
+                "name": "VideoEncoder_1",
+                "quality": "3",
+                "resolution": "2560*1920",
+                "smart_codec": "off"
+            }
+        }
+    },
+    "getWhitelampConfig": {
+        "image": {
+            "switch": {
+                "best_view_distance": "0",
+                "clear_licence_plate_mode": "off",
+                "flip_type": "off",
+                "full_color_min_keep_time": "30",
+                "full_color_people_enhance": "off",
+                "image_scene_mode": "normal",
+                "image_scene_mode_autoday": "normal",
+                "image_scene_mode_autonight": "normal",
+                "image_scene_mode_common": "normal",
+                "image_scene_mode_shedday": "normal",
+                "image_scene_mode_shednight": "normal",
+                "ldc": "on",
+                "night_vision_mode": "inf_night_vision",
+                "overexposure_people_suppression": "off",
+                "rotate_type": "off",
+                "schedule_end_time": "64800",
+                "schedule_start_time": "21600",
+                "switch_mode": "common",
+                "wtl_force_time": "300",
+                "wtl_intensity_level": "3"
+            }
+        }
+    },
+    "getWhitelampStatus": {
+        "rest_time": 0,
+        "status": 0
+    },
+    "get_audio_capability": {
+        "get": {
+            "audio_capability": {
+                "device_microphone": {
+                    "aec": "1",
+                    "channels": "1",
+                    "echo_cancelling": "0",
+                    "encode_type": [
+                        "G711alaw"
+                    ],
+                    "half_duplex": "1",
+                    "mute": "1",
+                    "noise_cancelling": "1",
+                    "sampling_rate": [
+                        "8"
+                    ],
+                    "volume": "1"
+                },
+                "device_speaker": {
+                    "channels": "1",
+                    "decode_type": [
+                        "G711alaw"
+                    ],
+                    "mute": "0",
+                    "output_device_type": "0",
+                    "sampling_rate": [
+                        "8"
+                    ],
+                    "system_volume": "80",
+                    "volume": "1"
+                }
+            }
+        }
+    },
+    "get_audio_config": {
+        "get": {
+            "audio_config": {
+                "microphone": {
+                    "bitrate": "64",
+                    "channels": "1",
+                    "echo_cancelling": "off",
+                    "encode_type": "G711alaw",
+                    "input_device_type": "MicIn",
+                    "mute": "off",
+                    "noise_cancelling": "on",
+                    "sampling_rate": "8",
+                    "volume": "80"
+                },
+                "speaker": {
+                    "mute": "off",
+                    "output_device_type": "SpeakerOut",
+                    "volume": "80"
+                }
+            }
+        }
+    },
+    "get_cet": {
+        "get": {
+            "cet": {
+                "vhttpd": {
+                    "port": "8800"
+                }
+            }
+        }
+    },
+    "get_function": {
+        "get": {
+            "function": {
+                "module_spec": {
+                    "ae_weighting_table_resolution": "5*5",
+                    "ai_enhance_capability": "1",
+                    "ai_enhance_range": [
+                        "traditional_enhance"
+                    ],
+                    "ai_firmware_upgrade": "0",
+                    "alarm_out_num": "0",
+                    "app_version": "1.0.0",
+                    "audio": [
+                        "speaker",
+                        "microphone"
+                    ],
+                    "auth_encrypt": "1",
+                    "auto_ip_configurable": "1",
+                    "backlight_coexistence": "1",
+                    "change_password": "1",
+                    "client_info": "1",
+                    "cloud_storage_version": "1.0",
+                    "config_recovery": [
+                        "audio_config",
+                        "OSD",
+                        "image",
+                        "video"
+                    ],
+                    "custom_area_compensation": "1",
+                    "custom_auto_mode_exposure_level": "1",
+                    "daynight_subdivision": "1",
+                    "device_share": [
+                        "preview",
+                        "playback",
+                        "voice",
+                        "cloud_storage"
+                    ],
+                    "download": [
+                        "video"
+                    ],
+                    "events": [
+                        "motion",
+                        "tamper"
+                    ],
+                    "force_iframe_support": "1",
+                    "http_system_state_audio_support": "1",
+                    "image_capability": "1",
+                    "image_list": [
+                        "supplement_lamp",
+                        "expose"
+                    ],
+                    "ir_led_pwm_control": "1",
+                    "led": "1",
+                    "lens_mask": "1",
+                    "linkage_capability": "1",
+                    "local_storage": "1",
+                    "media_encrypt": "1",
+                    "motor": "0",
+                    "msg_alarm_list": [
+                        "sound",
+                        "light"
+                    ],
+                    "msg_push": "1",
+                    "multi_user": "0",
+                    "multicast": "0",
+                    "network": [
+                        "wifi",
+                        "ethernet"
+                    ],
+                    "osd_capability": "1",
+                    "ota_upgrade": "1",
+                    "p2p_support_versions": [
+                        "2.0"
+                    ],
+                    "personalized_audio_alarm": "0",
+                    "playback": [
+                        "local",
+                        "p2p",
+                        "relay"
+                    ],
+                    "playback_scale": "1",
+                    "preview": [
+                        "local",
+                        "p2p",
+                        "relay"
+                    ],
+                    "ptz": "0",
+                    "record_max_slot_cnt": "6",
+                    "record_type": [
+                        "timing",
+                        "motion"
+                    ],
+                    "relay_support_versions": [
+                        "2.0"
+                    ],
+                    "remote_upgrade": "1",
+                    "reonboarding": "0",
+                    "smart_codec": "0",
+                    "smart_detection": "1",
+                    "ssl_cer_version": "1.0",
+                    "storage_api_version": "2.2",
+                    "storage_capability": "1",
+                    "stream_max_sessions": "10",
+                    "streaming_support_versions": [
+                        "2.0"
+                    ],
+                    "tapo_care_version": "1.0.0",
+                    "target_track": "0",
+                    "timing_reboot": "1",
+                    "verification_change_password": "1",
+                    "video_codec": [
+                        "h264",
+                        "h265"
+                    ],
+                    "video_detection_digital_sensitivity": "1",
+                    "wide_range_inf_sensitivity": "1",
+                    "wifi_connection_info": "1",
+                    "wireless_hotspot": "0"
+                }
+            }
+        }
+    },
+    "scanApList": {
+        "onboarding": {
+            "scan": {
+                "ap_list": [
+                    {
+                        "auth": 3,
+                        "bssid": "000000000000",
+                        "encryption": 2,
+                        "rssi": 2,
+                        "ssid": "I01BU0tFRF9TU0lEIw=="
+                    }
+                ],
+                "wpa3_supported": "true"
+            }
+        }
+    }
+}

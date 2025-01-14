@@ -792,6 +792,8 @@ class SmartDevice(Device):
             return DeviceType.Thermostat
         if "ROBOVAC" in device_type:
             return DeviceType.Vacuum
+        if "TAPOCHIME" in device_type:
+            return DeviceType.Chime
         _LOGGER.warning("Unknown device type, falling back to plug")
         return DeviceType.Plug
 
