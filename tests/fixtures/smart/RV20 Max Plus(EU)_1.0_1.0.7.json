@@ -163,19 +163,11 @@
     "getCleanAttr": {"suction": 2, "cistern": 2, "clean_number": 1},
     "getCleanInfo": {"clean_time": 5, "clean_area": 5, "clean_percent": 1},
     "getCleanStatus": {"getCleanStatus": {"clean_status": 0, "is_working": false, "is_mapping": false, "is_relocating": false}},
-    "getCleanRecords": {
-        "lastest_day_record": [
-            0,
-            0,
-            0,
-            0
-        ],
-        "record_list": [],
-        "record_list_num": 0,
-        "total_area": 0,
-        "total_number": 0,
-        "total_time": 0
-    },
+    "getCleanRecords": {"total_time": 77, "total_area": 47, "total_number": 3, "record_list_num": 3, "lastest_day_record": [1736797545, 25, 16, 1], "record_list": [{"map_id": 1736598799, "error": 0, "clean_time": 27, "clean_area": 17,
+"dust_collection": false, "timestamp": 1736601522, "start_type": 1, "task_type": 0, "message": 1, "info_num": 1, "record_index": 0}, {"map_id": 1736598799, "error": 0, "clean_time": 25, "clean_area": 14, "dust_collection": false, "timestamp":
+1736684961, "start_type": 1, "task_type": 0, "message": 0, "info_num": 0, "record_index": 1}, {"map_id": 1736598799, "error": 0, "clean_time": 25, "clean_area": 16, "dust_collection": true, "timestamp": 1736797545, "start_type": 1, "task_type":
+0, "message": 0, "info_num": 3, "record_index": 2}]},
+    "getAreaUnit": {"area_unit": 0},
     "getConsumablesInfo": {
         "charge_contact_time": 0,
         "edge_brush_time": 0,
