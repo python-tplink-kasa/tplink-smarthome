@@ -5,23 +5,16 @@ from __future__ import annotations
 import logging
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
-from enum import IntEnum
+from typing import cast
 
 from mashumaro import DataClassDictMixin, field_options
 from mashumaro.types import SerializationStrategy
 
 from ...feature import Feature
-from ..smartmodule import SmartModule
+from ..smartmodule import Module, SmartModule
+from .clean import AreaUnit, Clean
 
 _LOGGER = logging.getLogger(__name__)
-
-
-class AreaUnit(IntEnum):
-    """Area unit."""
-
-    Sqm = 0
-    Sqft = 1
-    Ping = 2
 
 
 @dataclass
@@ -131,7 +124,7 @@ class VacuumRecords(SmartModule):
 
     async def _post_update_hook(self) -> None:
         """Cache parsed data after an update."""
-        self._parsed_data = Records.from_dict(self.data["getCleanRecords"])
+        self._parsed_data = Records.from_dict(self.data)
 
     def _initialize_features(self) -> None:
         """Initialize features."""
@@ -186,7 +179,6 @@ class VacuumRecords(SmartModule):
         """Query to execute during the update cycle."""
         return {
             "getCleanRecords": {},
-            "getAreaUnit": {},
         }
 
     @property
@@ -222,7 +214,8 @@ class VacuumRecords(SmartModule):
     @property
     def area_unit(self) -> AreaUnit:
         """Return area unit."""
-        return AreaUnit(self.data["getAreaUnit"]["area_unit"])
+        clean = cast(Clean, self._device._modules[Module.Clean])
+        return clean.area_unit
 
     @property
     def parsed_data(self) -> Records:
