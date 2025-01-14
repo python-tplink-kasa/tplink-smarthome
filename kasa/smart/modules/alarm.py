@@ -2,10 +2,15 @@
 
 from __future__ import annotations
 
-from typing import Literal
+from typing import TYPE_CHECKING, Annotated, Literal, TypeAlias
 
 from ...feature import Feature
+from ...module import FeatureAttribute
 from ..smartmodule import SmartModule
+
+DURATION_MAX = 10 * 60
+
+AlarmVolume: TypeAlias = Literal["mute", "low", "normal", "high"]
 
 
 class Alarm(SmartModule):
@@ -21,10 +26,7 @@ class Alarm(SmartModule):
         }
 
     def _initialize_features(self) -> None:
-        """Initialize features.
-
-        This is implemented as some features depend on device responses.
-        """
+        """Initialize features."""
         device = self._device
         self._add_feature(
             Feature(
@@ -71,7 +73,20 @@ class Alarm(SmartModule):
                 attribute_setter="set_alarm_volume",
                 category=Feature.Category.Config,
                 type=Feature.Type.Choice,
-                choices_getter=lambda: ["low", "normal", "high"],
+                choices_getter=lambda: ["mute", "low", "normal", "high"],
+            )
+        )
+        self._add_feature(
+            Feature(
+                device,
+                id="alarm_duration",
+                name="Alarm duration",
+                container=self,
+                attribute_getter="alarm_duration",
+                attribute_setter="set_alarm_duration",
+                category=Feature.Category.Config,
+                type=Feature.Type.Number,
+                range_getter=lambda: (1, DURATION_MAX),
             )
         )
         self._add_feature(
@@ -96,15 +111,16 @@ class Alarm(SmartModule):
         )
 
     @property
-    def alarm_sound(self) -> str:
+    def alarm_sound(self) -> Annotated[str, FeatureAttribute()]:
         """Return current alarm sound."""
         return self.data["get_alarm_configure"]["type"]
 
-    async def set_alarm_sound(self, sound: str) -> dict:
+    async def set_alarm_sound(self, sound: str) -> Annotated[dict, FeatureAttribute()]:
         """Set alarm sound.
 
         See *alarm_sounds* for list of available sounds.
         """
+        self._check_sound(sound)
         payload = self.data["get_alarm_configure"].copy()
         payload["type"] = sound
         return await self.call("set_alarm_configure", payload)
@@ -115,14 +131,31 @@ class Alarm(SmartModule):
         return self.data["get_support_alarm_type_list"]["alarm_type_list"]
 
     @property
-    def alarm_volume(self) -> Literal["low", "normal", "high"]:
+    def alarm_volume(self) -> Annotated[AlarmVolume, FeatureAttribute()]:
         """Return alarm volume."""
         return self.data["get_alarm_configure"]["volume"]
 
-    async def set_alarm_volume(self, volume: Literal["low", "normal", "high"]) -> dict:
+    async def set_alarm_volume(
+        self, volume: AlarmVolume | int
+    ) -> Annotated[dict, FeatureAttribute()]:
         """Set alarm volume."""
+        self._check_and_convert_volume(volume)
         payload = self.data["get_alarm_configure"].copy()
         payload["volume"] = volume
+        return await self.call("set_alarm_configure", payload)
+
+    @property
+    def alarm_duration(self) -> Annotated[int, FeatureAttribute()]:
+        """Return alarm duration."""
+        return self.data["get_alarm_configure"]["duration"]
+
+    async def set_alarm_duration(
+        self, duration: int
+    ) -> Annotated[dict, FeatureAttribute()]:
+        """Set alarm duration."""
+        self._check_duration(duration)
+        payload = self.data["get_alarm_configure"].copy()
+        payload["duration"] = duration
         return await self.call("set_alarm_configure", payload)
 
     @property
@@ -136,10 +169,68 @@ class Alarm(SmartModule):
         src = self._device.sys_info["in_alarm_source"]
         return src if src else None
 
-    async def play(self) -> dict:
-        """Play alarm."""
-        return await self.call("play_alarm")
+    async def play(
+        self,
+        *,
+        duration: int | None = None,
+        volume: int | AlarmVolume | None = None,
+        sound: str | None = None,
+    ) -> dict:
+        """Play alarm.
+
+        The optional *duration*, *volume*, and *sound* to override the device settings.
+        *volume* can be set to 'mute', 'low', 'normal', or 'high'.
+        *duration* is in seconds.
+        See *alarm_sounds* for the list of sounds available for the device.
+        """
+        params: dict[str, str | int] = {}
+
+        if duration is not None:
+            self._check_duration(duration)
+            params["alarm_duration"] = duration
+
+        if volume is not None:
+            target_volume = self._check_and_convert_volume(volume)
+            params["alarm_volume"] = target_volume
+
+        if sound is not None:
+            self._check_sound(sound)
+            params["alarm_type"] = sound
+
+        return await self.call("play_alarm", params)
 
     async def stop(self) -> dict:
         """Stop alarm."""
         return await self.call("stop_alarm")
+
+    def _check_and_convert_volume(self, volume: str | int) -> str:
+        """Raise an exception on invalid volume."""
+        volume_int_to_str = {
+            0: "mute",
+            1: "low",
+            2: "normal",
+            3: "high",
+        }
+        if isinstance(volume, int):
+            volume = volume_int_to_str.get(volume, "invalid")
+
+        if TYPE_CHECKING:
+            assert isinstance(volume, str)
+
+        if volume not in volume_int_to_str.values():
+            raise ValueError(
+                f"Invalid volume {volume} "
+                f"available: {volume_int_to_str.keys()}, {volume_int_to_str.values()}"
+            )
+
+        return volume
+
+    def _check_duration(self, duration: int) -> None:
+        """Raise an exception on invalid duration."""
+        if duration < 1 or duration > DURATION_MAX:
+            raise ValueError(f"Invalid duration {duration} available: 1-600")
+
+    def _check_sound(self, sound: str) -> None:
+        """Raise an exception on invalid sound."""
+        if sound not in self.alarm_sounds:
+            raise ValueError(f"Invalid sound {sound} available: {self.alarm_sounds}")
