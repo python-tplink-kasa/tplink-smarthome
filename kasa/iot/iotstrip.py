@@ -161,11 +161,17 @@ class IotStrip(IotDevice):
 
     async def turn_on(self, **kwargs) -> dict:
         """Turn the strip on."""
-        return await self._query_helper("system", "set_relay_state", {"state": 1})
+        for plug in self.children:
+            if plug.is_off:
+                await plug.turn_on()
+        return {}
 
     async def turn_off(self, **kwargs) -> dict:
         """Turn the strip off."""
-        return await self._query_helper("system", "set_relay_state", {"state": 0})
+        for plug in self.children:
+            if plug.is_on:
+                await plug.turn_off()
+        return {}
 
     @property  # type: ignore
     @requires_update

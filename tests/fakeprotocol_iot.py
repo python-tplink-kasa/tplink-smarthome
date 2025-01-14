@@ -308,10 +308,6 @@ class FakeIotTransport(BaseTransport):
             child_ids = []
         _LOGGER.debug("Setting relay state to %s", x["state"])
 
-        if not child_ids and "children" in self.proto["system"]["get_sysinfo"]:
-            for child in self.proto["system"]["get_sysinfo"]["children"]:
-                child_ids.append(child["id"])
-
         _LOGGER.info("child_ids: %s", child_ids)
         if child_ids:
             for child in self.proto["system"]["get_sysinfo"]["children"]:

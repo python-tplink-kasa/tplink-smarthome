@@ -5,6 +5,7 @@ import pytest
 from pytest_mock import MockerFixture
 
 from kasa import Device, Feature, KasaException
+from kasa.iot import IotStrip
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -168,7 +169,10 @@ async def test_feature_setters(dev: Device, mocker: MockerFixture):
         if feat.attribute_setter is None:
             return
 
-        expecting_call = feat.id not in internal_setters
+        # IotStrip makes calls via it's children
+        expecting_call = feat.id not in internal_setters and not isinstance(
+            dev, IotStrip
+        )
 
         if feat.type == Feature.Type.Number:
             await feat.set_value(feat.minimum_value)

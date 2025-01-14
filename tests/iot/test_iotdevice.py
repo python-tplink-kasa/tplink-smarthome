@@ -137,8 +137,9 @@ async def test_query_helper(dev):
 @device_iot
 @turn_on
 async def test_state(dev, turn_on):
-    await handle_turn_on(dev, turn_on)
     orig_state = dev.is_on
+    await handle_turn_on(dev, turn_on)
+    await dev.update()
     if orig_state:
         await dev.turn_off()
         await dev.update()
