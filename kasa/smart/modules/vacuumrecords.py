@@ -26,10 +26,7 @@ class AreaUnit(IntEnum):
 
 @dataclass
 class LatestRecord(DataClassDictMixin):
-    """Stats from last clean.
-
-    TODO: this is just a list-formatted Record, with only some fields being available.
-    """
+    """Stats from last clean."""
 
     timestamp: datetime
     clean_time: int
@@ -138,30 +135,30 @@ class VacuumRecords(SmartModule):
 
     def _initialize_features(self) -> None:
         """Initialize features."""
-        self._add_feature(
-            Feature(
-                self._device,
-                id="total_clean_area",
-                name="Total area cleaned",
-                container=self,
-                attribute_getter="total_clean_area",
-                unit_getter="area_unit",
-                category=Feature.Category.Info,
-                type=Feature.Type.Sensor,
+        for type_ in ["total", "last"]:
+            self._add_feature(
+                Feature(
+                    self._device,
+                    id=f"{type_}_clean_area",
+                    name=f"{type_.capitalize()} area cleaned",
+                    container=self,
+                    attribute_getter=f"{type_}_clean_area",
+                    unit_getter="area_unit",
+                    category=Feature.Category.Debug,
+                    type=Feature.Type.Sensor,
+                )
             )
-        )
-        self._add_feature(
-            Feature(
-                self._device,
-                id="total_clean_time",
-                name="Total time cleaned",
-                container=self,
-                attribute_getter="total_clean_time",
-                unit_getter=lambda: "min",  # ha-friendly unit, see UnitOfTime.MINUTES
-                category=Feature.Category.Info,
-                type=Feature.Type.Sensor,
+            self._add_feature(
+                Feature(
+                    self._device,
+                    id=f"{type_}_clean_time",
+                    name=f"{type_.capitalize()} time cleaned",
+                    container=self,
+                    attribute_getter=f"{type_}_clean_time",
+                    category=Feature.Category.Debug,
+                    type=Feature.Type.Sensor,
+                )
             )
-        )
         self._add_feature(
             Feature(
                 self._device,
@@ -169,6 +166,17 @@ class VacuumRecords(SmartModule):
                 name="Total clean count",
                 container=self,
                 attribute_getter="total_clean_count",
+                category=Feature.Category.Debug,
+                type=Feature.Type.Sensor,
+            )
+        )
+        self._add_feature(
+            Feature(
+                self._device,
+                id="last_clean_timestamp",
+                name="Last clean timestamp",
+                container=self,
+                attribute_getter="last_clean_timestamp",
                 category=Feature.Category.Debug,
                 type=Feature.Type.Sensor,
             )
@@ -197,17 +205,17 @@ class VacuumRecords(SmartModule):
         return self._parsed_data.total_count
 
     @property
-    def latest_clean_area(self) -> int:
+    def last_clean_area(self) -> int:
         """Return latest cleaning area."""
         return self._parsed_data.latest_clean.clean_area
 
     @property
-    def latest_clean_time(self) -> timedelta:
+    def last_clean_time(self) -> timedelta:
         """Return total cleaning time."""
         return self._parsed_data.latest_clean.clean_time
 
     @property
-    def latest_clean_timestamp(self) -> datetime:
+    def last_clean_timestamp(self) -> datetime:
         """Return latest cleaning timestamp."""
         return self._parsed_data.latest_clean.timestamp
 
