@@ -686,7 +686,23 @@ class IotDevice(Device):
         async def _join(target: str, payload: dict) -> dict:
             return await self._query_helper(target, "set_stainfo", payload)
 
-        payload = {"ssid": ssid, "password": password, "key_type": int(keytype)}
+        try:
+            keytype = int(keytype)
+        except ValueError:
+            match keytype.lower():
+                case "open":
+                    keytype = 0
+                case "wep":
+                    keytype = 1
+                case "wpa":
+                    keytype = 2
+                case "wpa2":
+                    keytype = 3
+                case "wpa3":
+                    keytype = 4
+                case _:
+                    raise KasaException(f"Unknown network keytype: {keytype}")
+        payload = {"ssid": ssid, "password": password, "key_type": keytype}
         try:
             return await _join("netif", payload)
         except KasaException as ex:
