@@ -55,4 +55,6 @@ class BatterySensor(SmartModule):
     @property
     def battery_low(self) -> bool:
         """Return True if battery is low."""
-        return self._device.sys_info["at_low_battery"]
+        return self._device.sys_info.get(
+            "at_low_battery", self._device.sys_info.get("is_low")
+        )
