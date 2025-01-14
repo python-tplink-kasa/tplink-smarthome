@@ -195,7 +195,7 @@ class Feature:
         if isinstance(getter, str):
             return getattr(self._container, getter)
         if callable(getter):
-            return getter()
+            return getter(self._container)
         raise ValueError("Invalid getter: %s", getter)  # pragma: no cover
 
     @property
