@@ -1187,6 +1187,63 @@ async def test_feature_set_child(mocker, runner):
     assert res.exit_code == 0
 
 
+async def test_feature_set_unquoted(mocker, runner):
+    """Test feature command's set value."""
+    dummy_device = await get_device_for_fixture_protocol(
+        "ES20M(US)_1.0_1.0.11.json", "IOT"
+    )
+    range_setter = mocker.patch("kasa.iot.modules.motion.Motion._set_range_from_str")
+    mocker.patch("kasa.discover.Discover.discover_single", return_value=dummy_device)
+
+    res = await runner.invoke(
+        cli,
+        ["--host", "127.0.0.123", "--debug", "feature", "pir_range", "Far"],
+        catch_exceptions=False,
+    )
+
+    range_setter.assert_not_called()
+    assert "Error: Invalid value: " in res.output
+    assert res.exit_code != 0
+
+
+async def test_feature_set_badquoted(mocker, runner):
+    """Test feature command's set value."""
+    dummy_device = await get_device_for_fixture_protocol(
+        "ES20M(US)_1.0_1.0.11.json", "IOT"
+    )
+    range_setter = mocker.patch("kasa.iot.modules.motion.Motion._set_range_from_str")
+    mocker.patch("kasa.discover.Discover.discover_single", return_value=dummy_device)
+
+    res = await runner.invoke(
+        cli,
+        ["--host", "127.0.0.123", "--debug", "feature", "pir_range", "`Far"],
+        catch_exceptions=False,
+    )
+
+    range_setter.assert_not_called()
+    assert "Error: Invalid value: " in res.output
+    assert res.exit_code != 0
+
+
+async def test_feature_set_goodquoted(mocker, runner):
+    """Test feature command's set value."""
+    dummy_device = await get_device_for_fixture_protocol(
+        "ES20M(US)_1.0_1.0.11.json", "IOT"
+    )
+    range_setter = mocker.patch("kasa.iot.modules.motion.Motion._set_range_from_str")
+    mocker.patch("kasa.discover.Discover.discover_single", return_value=dummy_device)
+
+    res = await runner.invoke(
+        cli,
+        ["--host", "127.0.0.123", "--debug", "feature", "pir_range", "'Far'"],
+        catch_exceptions=False,
+    )
+
+    range_setter.assert_called()
+    assert "Error: Invalid value: " not in res.output
+    assert res.exit_code == 0
+
+
 async def test_cli_child_commands(
     dev: Device, runner: CliRunner, mocker: MockerFixture
 ):

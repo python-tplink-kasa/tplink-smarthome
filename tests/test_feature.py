@@ -140,7 +140,10 @@ async def test_feature_choice_list(dummy_feature, caplog, mocker: MockerFixture)
     mock_setter.assert_called_with("first")
     mock_setter.reset_mock()
 
-    with pytest.raises(ValueError, match="Unexpected value for dummy_feature: invalid"):  # noqa: PT012
+    with pytest.raises(  # noqa: PT012
+        ValueError,
+        match="Unexpected value for dummy_feature: 'invalid' (?: - allowed: .*)?",
+    ):
         await dummy_feature.set_value("invalid")
         assert "Unexpected value" in caplog.text
 

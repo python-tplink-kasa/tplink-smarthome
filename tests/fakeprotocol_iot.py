@@ -192,6 +192,7 @@ AMBIENT_MODULE = {
 
 
 MOTION_MODULE = {
+    "get_adc_value": {"value": 50, "err_code": 0},
     "get_config": {
         "enable": 0,
         "version": "1.0",
@@ -201,7 +202,7 @@ MOTION_MODULE = {
         "max_adc": 4095,
         "array": [80, 50, 20, 0],
         "err_code": 0,
-    }
+    },
 }
 
 LIGHT_DETAILS = {

@@ -6,10 +6,7 @@ import ast
 
 import asyncclick as click
 
-from kasa import (
-    Device,
-    Feature,
-)
+from kasa import Device, Feature
 
 from .common import (
     echo,
@@ -133,7 +130,22 @@ async def feature(
         echo(f"{feat.name} ({name}): {feat.value}{unit}")
         return feat.value
 
-    value = ast.literal_eval(value)
+    try:
+        # Attempt to parse as python literal.
+        value = ast.literal_eval(value)
+    except ValueError:
+        # The value is probably an unquoted string, so we'll raise an error,
+        # and tell the user to quote the string.
+        raise click.exceptions.BadParameter(
+            f'{repr(value)} for {name} (Perhaps you forgot to "quote" the value?)'
+        ) from SyntaxError
+    except SyntaxError:
+        # There are likely miss-matched quotes or odd characters in the input,
+        # so abort and complain to the user.
+        raise click.exceptions.BadParameter(
+            f"{repr(value)} for {name}"
+        ) from SyntaxError
+
     echo(f"Changing {name} from {feat.value} to {value}")
     response = await dev.features[name].set_value(value)
     await dev.update()

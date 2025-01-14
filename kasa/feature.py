@@ -255,7 +255,7 @@ class Feature:
         elif self.type == Feature.Type.Choice:  # noqa: SIM102
             if not self.choices or value not in self.choices:
                 raise ValueError(
-                    f"Unexpected value for {self.name}: {value}"
+                    f"Unexpected value for {self.name}: '{value}'"
                     f" - allowed: {self.choices}"
                 )
 
@@ -278,7 +278,18 @@ class Feature:
             return f"Unable to read value ({self.id}): {ex}"
 
         if self.type == Feature.Type.Choice:
-            if not isinstance(choices, list) or value not in choices:
+            if not isinstance(choices, list):
+                _LOGGER.error(
+                    "Choices are not properly defined for %s (%s). Type: <%s> Value: %s",  # noqa: E501
+                    self.name,
+                    self.id,
+                    type(choices),
+                    choices,
+                )
+                return f"{self.name} ({self.id}): improperly defined choice set."
+            if (value not in choices) and (
+                isinstance(value, Enum) and value.name not in choices
+            ):
                 _LOGGER.warning(
                     "Invalid value for for choice %s (%s): %s not in %s",
                     self.name,
@@ -290,7 +301,13 @@ class Feature:
                     f"{self.name} ({self.id}): invalid value '{value}' not in {choices}"
                 )
             value = " ".join(
-                [f"*{choice}*" if choice == value else choice for choice in choices]
+                [
+                    f"*{choice}*"
+                    if choice == value
+                    or (isinstance(value, Enum) and choice == value.name)
+                    else f"{choice}"
+                    for choice in choices
+                ]
             )
         if self.precision_hint is not None and isinstance(value, float):
             value = round(value, self.precision_hint)
