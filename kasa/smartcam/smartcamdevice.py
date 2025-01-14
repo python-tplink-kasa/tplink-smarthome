@@ -11,7 +11,7 @@ from ..module import Module
 from ..protocols.smartcamprotocol import _ChildCameraProtocolWrapper
 from ..smart import SmartChildDevice, SmartDevice
 from ..smart.smartdevice import ComponentsRaw
-from .modules import ChildDevice, DeviceModule
+from .modules import Camera, ChildDevice, DeviceModule, Time
 from .smartcammodule import SmartCamModule
 
 _LOGGER = logging.getLogger(__name__)
@@ -166,22 +166,39 @@ class SmartCamDevice(SmartDevice):
 
         self._children = children
 
+    def _try_add_listen_module(self) -> None:
+        try:
+            import onvif  # type: ignore[import-untyped] # noqa: F401
+        except ImportError:
+            return
+        from .modules.onviflisten import OnvifListen
+
+        self._modules[OnvifListen._module_name()] = OnvifListen(
+            self, OnvifListen._module_name()
+        )
+
     async def _initialize_modules(self) -> None:
         """Initialize modules based on component negotiation response."""
         for mod in SmartCamModule.REGISTERED_MODULES.values():
+            required_component = cast(str, mod.REQUIRED_COMPONENT)
             if (
-                mod.REQUIRED_COMPONENT
-                and mod.REQUIRED_COMPONENT not in self._components
-                # Always add Camera module to cameras
-                and (
-                    mod._module_name() != Module.Camera
-                    or self._device_type is not DeviceType.Camera
+                required_component in self._components
+                or any(
+                    self.sys_info.get(key) is not None
+                    for key in mod.SYSINFO_LOOKUP_KEYS
                 )
+                or mod in self.FIRST_UPDATE_MODULES
+                or mod is Time
             ):
-                continue
-            module = mod(self, mod._module_name())
-            if await module._check_supported():
-                self._modules[module.name] = module
+                module = mod(self, mod._module_name())
+                if await module._check_supported():
+                    self._modules[module.name] = module
+
+        if self._device_type is DeviceType.Camera:
+            self._modules[Camera._module_name()] = Camera(self, Camera._module_name())
+
+        if Module.MotionDetection in self._modules:
+            self._try_add_listen_module()
 
     async def _initialize_features(self) -> None:
         """Initialize device features."""

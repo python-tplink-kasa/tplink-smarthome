@@ -72,6 +72,7 @@ def _legacy_type_to_class(_type: str) -> Any:
         "device": None,
         "feature": None,
         "light": None,
+        "listen": None,
         "wifi": None,
         "time": None,
         "schedule": None,

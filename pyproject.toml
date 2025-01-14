@@ -33,6 +33,9 @@ docs = [
     "sphinx>=7.4.7",
 ]
 shell = ["ptpython", "rich"]
+onvif = [
+    "onvif-zeep-async>=3.1.13",
+]
 
 [project.urls]
 "Homepage" = "https://github.com/python-kasa/python-kasa"
