@@ -26,6 +26,7 @@ from .lighteffect import LightEffect
 from .lightpreset import LightPreset
 from .lightstripeffect import LightStripEffect
 from .lighttransition import LightTransition
+from .map import Map
 from .matter import Matter
 from .motionsensor import MotionSensor
 from .overheatprotection import OverheatProtection
@@ -76,4 +77,5 @@ __all__ = [
     "HomeKit",
     "Matter",
     "Dustbin",
+    "Map",
 ]
