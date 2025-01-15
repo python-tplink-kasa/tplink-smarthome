@@ -13,6 +13,7 @@ from .motion import Motion
 from .rulemodule import Rule, RuleModule
 from .schedule import Schedule
 from .time import Time
+from .turnonbehavior import TurnOnBehaviorModule
 from .usage import Usage
 
 __all__ = [
@@ -31,5 +32,6 @@ __all__ = [
     "RuleModule",
     "Schedule",
     "Time",
+    "TurnOnBehaviorModule",
     "Usage",
 ]
