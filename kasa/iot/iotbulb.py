@@ -4,13 +4,7 @@ from __future__ import annotations
 
 import logging
 import re
-from dataclasses import dataclass
-from enum import Enum
-from typing import Annotated, cast
-
-from mashumaro import DataClassDictMixin
-from mashumaro.config import BaseConfig
-from mashumaro.types import Alias
+from typing import cast
 
 from ..device_type import DeviceType
 from ..deviceconfig import DeviceConfig
@@ -27,58 +21,10 @@ from .modules import (
     LightPreset,
     Schedule,
     Time,
+    TurnOnBehaviorModule,
     Usage,
 )
-
-
-class BehaviorMode(str, Enum):
-    """Enum to present type of turn on behavior."""
-
-    #: Return to the last state known state.
-    Last = "last_status"
-    #: Use chosen preset.
-    Preset = "customize_preset"
-    #: Circadian
-    Circadian = "circadian"
-
-
-@dataclass
-class TurnOnBehavior(DataClassDictMixin):
-    """Model to present a single turn on behavior.
-
-    :param int preset: the index number of wanted preset.
-    :param BehaviorMode mode: last status or preset mode.
-     If you are changing existing settings, you should not set this manually.
-
-    To change the behavior, it is only necessary to change the :attr:`preset` field
-    to contain either the preset index, or ``None`` for the last known state.
-    """
-
-    class Config(BaseConfig):
-        """Serialization config."""
-
-        omit_none = True
-        serialize_by_alias = True
-
-    #: Wanted behavior
-    mode: BehaviorMode
-    #: Index of preset to use, or ``None`` for the last known state.
-    preset: Annotated[int | None, Alias("index")] = None
-    brightness: int | None = None
-    color_temp: int | None = None
-    hue: int | None = None
-    saturation: int | None = None
-
-
-@dataclass
-class TurnOnBehaviors(DataClassDictMixin):
-    """Model to contain turn on behaviors."""
-
-    #: The behavior when the bulb is turned on programmatically.
-    soft: Annotated[TurnOnBehavior, Alias("soft_on")]
-    #: The behavior when the bulb has been off from mains power.
-    hard: Annotated[TurnOnBehavior, Alias("hard_on")]
-
+from .modules.turnonbehavior import TurnOnBehaviors
 
 TPLINK_KELVIN = {
     "LB130": ColorTempRange(2500, 9000),
@@ -222,6 +168,10 @@ class IotBulb(IotDevice):
             Module.IotAntitheft, Antitheft(self, "smartlife.iot.common.anti_theft")
         )
         self.add_module(Module.Time, Time(self, "smartlife.iot.common.timesetting"))
+        self.add_module(
+            Module.IotTurnOnBehavior,
+            TurnOnBehaviorModule(self, "smartlife.iot.smartbulb.lightingservice"),
+        )
         self.add_module(Module.Energy, Emeter(self, self.emeter_type))
         self.add_module(Module.IotCountdown, Countdown(self, "countdown"))
         self.add_module(Module.IotCloud, Cloud(self, "smartlife.iot.common.cloud"))
