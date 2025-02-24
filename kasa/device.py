@@ -85,7 +85,7 @@ state
 rssi
 on_since
 reboot
-current_consumption
+power
 consumption_today
 consumption_this_month
 consumption_total
@@ -604,7 +604,7 @@ class Device(ABC):
         "emeter_realtime": (Module.Energy, ["status"]),
         "emeter_today": (Module.Energy, ["consumption_today"]),
         "emeter_this_month": (Module.Energy, ["consumption_this_month"]),
-        "current_consumption": (Module.Energy, ["current_consumption"]),
+        "current_consumption": (Module.Energy, ["power"]),
         "get_emeter_daily": (Module.Energy, ["get_daily_stats"]),
         "get_emeter_monthly": (Module.Energy, ["get_monthly_stats"]),
         # Other attributes

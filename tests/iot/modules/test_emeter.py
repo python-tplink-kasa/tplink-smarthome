@@ -133,9 +133,9 @@ async def test_erase_emeter_stats(dev):
 
 
 @has_emeter_iot
-async def test_current_consumption(dev):
+async def test_power(dev):
     emeter = dev.modules[Module.Energy]
-    x = emeter.current_consumption
+    x = emeter.power
     assert isinstance(x, float)
     assert x >= 0.0
 

@@ -38,11 +38,11 @@ class Energy(Module, ABC):
         self._add_feature(
             Feature(
                 device,
-                name="Current consumption",
-                attribute_getter="current_consumption",
+                name="Power",
+                attribute_getter="power",
                 container=self,
                 unit_getter=lambda: "W",
-                id="current_consumption",
+                id="power",
                 precision_hint=1,
                 category=Feature.Category.Primary,
                 type=Feature.Type.Sensor,
@@ -64,11 +64,11 @@ class Energy(Module, ABC):
         self._add_feature(
             Feature(
                 device,
-                id="consumption_this_month",
                 name="This month's consumption",
                 attribute_getter="consumption_this_month",
                 container=self,
                 unit_getter=lambda: "kWh",
+                id="consumption_this_month",
                 precision_hint=3,
                 category=Feature.Category.Info,
                 type=Feature.Type.Sensor,
@@ -123,8 +123,8 @@ class Energy(Module, ABC):
 
     @property
     @abstractmethod
-    def current_consumption(self) -> float | None:
-        """Get the current power consumption in Watt."""
+    def power(self) -> float | None:
+        """Get the current power draw in Watts."""
 
     @property
     @abstractmethod
@@ -182,6 +182,7 @@ class Energy(Module, ABC):
         "erase_emeter_stats": "erase_stats",
         "get_daystat": "get_daily_stats",
         "get_monthstat": "get_monthly_stats",
+        "current_consumption": "power",
     }
 
     if not TYPE_CHECKING:

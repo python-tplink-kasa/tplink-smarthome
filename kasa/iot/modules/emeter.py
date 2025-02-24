@@ -51,8 +51,8 @@ class Emeter(Usage, EnergyInterface):
         return data.get(current_month, 0.0)
 
     @property
-    def current_consumption(self) -> float | None:
-        """Get the current power consumption in Watt."""
+    def power(self) -> float | None:
+        """Get the current power draw in Watts."""
         return self.status.power
 
     @property

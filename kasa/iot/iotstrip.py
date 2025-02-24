@@ -201,10 +201,10 @@ class StripEmeter(IotModule, Energy):
         return {}
 
     @property
-    def current_consumption(self) -> float | None:
+    def power(self) -> float | None:
         """Get the current power consumption in watts."""
         return sum(
-            v if (v := plug.modules[Module.Energy].current_consumption) else 0.0
+            v if (v := plug.modules[Module.Energy].power) else 0.0
             for plug in self._device.children
         )
 

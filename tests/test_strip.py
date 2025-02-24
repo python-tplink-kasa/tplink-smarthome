@@ -159,4 +159,4 @@ async def test_children_energy(dev: Device):
         energy = plug.modules[Module.Energy]
         assert "voltage" in energy._module_features
         assert "current" in energy._module_features
-        assert "current_consumption" in energy._module_features
+        assert "power" in energy._module_features

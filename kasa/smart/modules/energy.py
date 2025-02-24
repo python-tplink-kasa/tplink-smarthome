@@ -67,9 +67,20 @@ class Energy(SmartModule, EnergyInterface):
         return []
 
     @property
-    def current_consumption(self) -> float | None:
-        """Current power in watts."""
-        return self._current_consumption
+    @raise_if_update_error
+    def power(self) -> float | None:
+        """Current power draw in Watts."""
+        if (power := self.energy.get("current_power")) is not None or (
+            power := self.data.get("get_emeter_data", {}).get("power_mw")
+        ) is not None:
+            return power / 1_000
+        # Fallback if get_energy_usage does not provide current_power,
+        # which can happen on some newer devices (e.g. P304M).
+        elif (
+            power := self.data.get("get_current_power", {}).get("current_power")
+        ) is not None:
+            return power
+        return None
 
     @property
     def energy(self) -> dict:
