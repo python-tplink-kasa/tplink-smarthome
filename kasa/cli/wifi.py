@@ -35,7 +35,7 @@ async def scan(dev):
 
 @wifi.command()
 @click.argument("ssid")
-@click.option("--keytype", prompt=True)
+@click.option("--keytype", prompt=True, default="3")
 @click.option("--password", prompt=True, hide_input=True)
 @pass_dev
 async def join(dev: Device, ssid: str, password: str, keytype: str):
