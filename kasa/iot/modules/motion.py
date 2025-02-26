@@ -159,7 +159,7 @@ class Motion(IotModule):
                 icon="mdi:motion-sensor",
                 attribute_getter="pir_triggered",
                 attribute_setter=None,
-                type=Feature.Type.Sensor,
+                type=Feature.Type.BinarySensor,
                 category=Feature.Category.Primary,
             )
         )
