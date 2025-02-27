@@ -17,6 +17,7 @@ from .colortemperature import ColorTemperature
 from .consumables import Consumables
 from .contactsensor import ContactSensor
 from .devicemodule import DeviceModule
+from .dimmercalibration import DimmerCalibration
 from .dustbin import Dustbin
 from .energy import Energy
 from .fan import Fan
@@ -49,6 +50,7 @@ __all__ = [
     "Time",
     "Energy",
     "DeviceModule",
+    "DimmerCalibration",
     "ChildDevice",
     "ChildLock",
     "ChildSetup",

@@ -1,0 +1,910 @@
+{
+    "child_devices": {
+        "SCRUBBED_CHILD_DEVICE_ID_1": {
+            "component_nego": {
+                "component_list": [
+                    {
+                        "id": "device",
+                        "ver_code": 2
+                    },
+                    {
+                        "id": "firmware",
+                        "ver_code": 2
+                    },
+                    {
+                        "id": "quick_setup",
+                        "ver_code": 3
+                    },
+                    {
+                        "id": "time",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "schedule",
+                        "ver_code": 2
+                    },
+                    {
+                        "id": "countdown",
+                        "ver_code": 2
+                    },
+                    {
+                        "id": "antitheft",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "account",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "synchronize",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "sunrise_sunset",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "cloud_connect",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "iot_cloud",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "device_local_time",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "default_states",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "brightness",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "preset",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "on_off_gradually",
+                        "ver_code": 2
+                    },
+                    {
+                        "id": "dimmer_calibration",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "overheat_protection",
+                        "ver_code": 1
+                    }
+                ]
+            },
+            "get_antitheft_rules": {
+                "antitheft_rule_max_count": 1,
+                "enable": false,
+                "rule_list": []
+            },
+            "get_calibrate_brightness": {
+                "max_threshold": 99,
+                "min_threshold": 17
+            },
+            "get_connect_cloud_state": {
+                "status": 0
+            },
+            "get_countdown_rules": {
+                "countdown_rule_max_count": 1,
+                "enable": false,
+                "rule_list": []
+            },
+            "get_device_info": {
+                "avatar": "switch_ks240",
+                "bind_count": 1,
+                "brightness": 100,
+                "category": "kasa.switch.outlet.sub-dimmer",
+                "default_states": {
+                    "re_power_type": "always_off",
+                    "re_power_type_capability": [
+                        "last_states",
+                        "always_on",
+                        "always_off"
+                    ],
+                    "type": "last_states"
+                },
+                "device_id": "SCRUBBED_CHILD_DEVICE_ID_1",
+                "device_on": false,
+                "fade_off_time": 1,
+                "fade_on_time": 1,
+                "fw_id": "00000000000000000000000000000000",
+                "fw_ver": "1.0.9 Build 241213 Rel.154621",
+                "gc": 1,
+                "gradually_off_mode": 1,
+                "gradually_on_mode": 1,
+                "has_set_location_info": false,
+                "hw_id": "9BAD152014738F0E3280642ED371F035",
+                "hw_ver": "1.0",
+                "la": 395515,
+                "lang": "en_US",
+                "led_off": 0,
+                "lo": -1049640,
+                "mac": "F0A731F1D977",
+                "max_fade_off_time": 60,
+                "max_fade_on_time": 60,
+                "model": "KS240",
+                "nickname": "TGl2aW5nIFJvb20gTGlnaHRz",
+                "oem_id": "2C46A55D4E2992A744968B8831EC6F99",
+                "on_off": 0,
+                "on_time": 0,
+                "original_device_id": "803B06E9B2ACEFF447E5D41A7533084621FB9F20",
+                "overheat_status": "normal",
+                "preset_state": [
+                    {
+                        "brightness": 100
+                    },
+                    {
+                        "brightness": 75
+                    },
+                    {
+                        "brightness": 50
+                    },
+                    {
+                        "brightness": 25
+                    },
+                    {
+                        "brightness": 1
+                    }
+                ],
+                "region": "America/Denver",
+                "specs": "",
+                "status_follow_edge": true,
+                "type": "SMART.KASASWITCH"
+            },
+            "get_device_usage": {
+                "time_usage": {
+                    "past30": 616,
+                    "past7": 0,
+                    "today": 0
+                }
+            },
+            "get_next_event": {},
+            "get_on_off_gradually_info": {
+                "off_state": {
+                    "duration": 1,
+                    "enable": true,
+                    "max_duration": 60
+                },
+                "on_state": {
+                    "duration": 1,
+                    "enable": true,
+                    "max_duration": 60
+                }
+            },
+            "get_preset_rules": {
+                "brightness": [
+                    100,
+                    75,
+                    50,
+                    25,
+                    1
+                ]
+            },
+            "get_schedule_rules": {
+                "enable": false,
+                "rule_list": [],
+                "schedule_rule_max_count": 32,
+                "start_index": 0,
+                "sum": 0
+            }
+        },
+        "SCRUBBED_CHILD_DEVICE_ID_2": {
+            "component_nego": {
+                "component_list": [
+                    {
+                        "id": "device",
+                        "ver_code": 2
+                    },
+                    {
+                        "id": "firmware",
+                        "ver_code": 2
+                    },
+                    {
+                        "id": "quick_setup",
+                        "ver_code": 3
+                    },
+                    {
+                        "id": "time",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "schedule",
+                        "ver_code": 2
+                    },
+                    {
+                        "id": "countdown",
+                        "ver_code": 2
+                    },
+                    {
+                        "id": "account",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "synchronize",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "sunrise_sunset",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "cloud_connect",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "iot_cloud",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "device_local_time",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "default_states",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "fan_control",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "overheat_protection",
+                        "ver_code": 1
+                    }
+                ]
+            },
+            "get_connect_cloud_state": {
+                "status": 0
+            },
+            "get_countdown_rules": {
+                "countdown_rule_max_count": 1,
+                "enable": false,
+                "rule_list": []
+            },
+            "get_device_info": {
+                "avatar": "ceiling_fan",
+                "bind_count": 1,
+                "category": "kasa.switch.outlet.sub-fan",
+                "default_states": {
+                    "re_power_fan_speed": 1,
+                    "re_power_type": "last_states",
+                    "re_power_type_capability": [
+                        "last_states",
+                        "always_on",
+                        "always_off"
+                    ]
+                },
+                "device_id": "SCRUBBED_CHILD_DEVICE_ID_2",
+                "device_on": false,
+                "fan_sleep_mode_on": false,
+                "fan_speed_level": 3,
+                "fw_id": "00000000000000000000000000000000",
+                "fw_ver": "1.0.9 Build 241213 Rel.154621",
+                "gc": 1,
+                "has_set_location_info": false,
+                "hw_id": "9BAD152014738F0E3280642ED371F035",
+                "hw_ver": "1.0",
+                "la": 395515,
+                "lang": "en_US",
+                "lo": -1049640,
+                "mac": "F0A731F1D977",
+                "model": "KS240",
+                "nickname": "TGl2aW5nIFJvb20gRmFu",
+                "oem_id": "2C46A55D4E2992A744968B8831EC6F99",
+                "original_device_id": "803B06E9B2ACEFF447E5D41A7533084621FB9F20",
+                "overheat_status": "normal",
+                "region": "America/Denver",
+                "specs": "",
+                "status_follow_edge": true,
+                "type": "SMART.KASASWITCH"
+            },
+            "get_device_usage": {
+                "time_usage": {
+                    "past30": 0,
+                    "past7": 0,
+                    "today": 0
+                }
+            },
+            "get_next_event": {},
+            "get_schedule_rules": {
+                "enable": false,
+                "rule_list": [],
+                "schedule_rule_max_count": 32,
+                "start_index": 0,
+                "sum": 0
+            }
+        }
+    },
+    "component_nego": {
+        "component_list": [
+            {
+                "id": "device",
+                "ver_code": 2
+            },
+            {
+                "id": "firmware",
+                "ver_code": 2
+            },
+            {
+                "id": "quick_setup",
+                "ver_code": 3
+            },
+            {
+                "id": "time",
+                "ver_code": 1
+            },
+            {
+                "id": "wireless",
+                "ver_code": 1
+            },
+            {
+                "id": "schedule",
+                "ver_code": 2
+            },
+            {
+                "id": "countdown",
+                "ver_code": 2
+            },
+            {
+                "id": "antitheft",
+                "ver_code": 1
+            },
+            {
+                "id": "account",
+                "ver_code": 1
+            },
+            {
+                "id": "synchronize",
+                "ver_code": 1
+            },
+            {
+                "id": "sunrise_sunset",
+                "ver_code": 1
+            },
+            {
+                "id": "led",
+                "ver_code": 2
+            },
+            {
+                "id": "cloud_connect",
+                "ver_code": 1
+            },
+            {
+                "id": "iot_cloud",
+                "ver_code": 1
+            },
+            {
+                "id": "device_local_time",
+                "ver_code": 1
+            },
+            {
+                "id": "default_states",
+                "ver_code": 1
+            },
+            {
+                "id": "control_child",
+                "ver_code": 2
+            },
+            {
+                "id": "child_device",
+                "ver_code": 2
+            },
+            {
+                "id": "brightness",
+                "ver_code": 1
+            },
+            {
+                "id": "preset",
+                "ver_code": 1
+            },
+            {
+                "id": "on_off_gradually",
+                "ver_code": 2
+            },
+            {
+                "id": "dimmer_calibration",
+                "ver_code": 1
+            },
+            {
+                "id": "fan_control",
+                "ver_code": 1
+            },
+            {
+                "id": "homekit",
+                "ver_code": 2
+            },
+            {
+                "id": "overheat_protection",
+                "ver_code": 1
+            }
+        ]
+    },
+    "discovery_result": {
+        "error_code": 0,
+        "result": {
+            "device_id": "00000000000000000000000000000000",
+            "device_model": "KS240(US)",
+            "device_type": "SMART.KASASWITCH",
+            "factory_default": false,
+            "ip": "127.0.0.123",
+            "is_support_iot_cloud": true,
+            "mac": "F0-A7-31-00-00-00",
+            "mgt_encrypt_schm": {
+                "encrypt_type": "KLAP",
+                "http_port": 80,
+                "is_support_https": false,
+                "lv": 2
+            },
+            "obd_src": "tplink",
+            "owner": "00000000000000000000000000000000",
+            "protocol_version": 1
+        }
+    },
+    "get_auto_update_info": {
+        "enable": true,
+        "random_range": 120,
+        "time": 180
+    },
+    "get_child_device_component_list": {
+        "child_component_list": [
+            {
+                "component_list": [
+                    {
+                        "id": "device",
+                        "ver_code": 2
+                    },
+                    {
+                        "id": "firmware",
+                        "ver_code": 2
+                    },
+                    {
+                        "id": "quick_setup",
+                        "ver_code": 3
+                    },
+                    {
+                        "id": "time",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "schedule",
+                        "ver_code": 2
+                    },
+                    {
+                        "id": "countdown",
+                        "ver_code": 2
+                    },
+                    {
+                        "id": "antitheft",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "account",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "synchronize",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "sunrise_sunset",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "cloud_connect",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "iot_cloud",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "device_local_time",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "default_states",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "brightness",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "preset",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "on_off_gradually",
+                        "ver_code": 2
+                    },
+                    {
+                        "id": "dimmer_calibration",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "overheat_protection",
+                        "ver_code": 1
+                    }
+                ],
+                "device_id": "SCRUBBED_CHILD_DEVICE_ID_1"
+            },
+            {
+                "component_list": [
+                    {
+                        "id": "device",
+                        "ver_code": 2
+                    },
+                    {
+                        "id": "firmware",
+                        "ver_code": 2
+                    },
+                    {
+                        "id": "quick_setup",
+                        "ver_code": 3
+                    },
+                    {
+                        "id": "time",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "schedule",
+                        "ver_code": 2
+                    },
+                    {
+                        "id": "countdown",
+                        "ver_code": 2
+                    },
+                    {
+                        "id": "account",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "synchronize",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "sunrise_sunset",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "cloud_connect",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "iot_cloud",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "device_local_time",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "default_states",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "fan_control",
+                        "ver_code": 1
+                    },
+                    {
+                        "id": "overheat_protection",
+                        "ver_code": 1
+                    }
+                ],
+                "device_id": "SCRUBBED_CHILD_DEVICE_ID_2"
+            }
+        ],
+        "start_index": 0,
+        "sum": 2
+    },
+    "get_child_device_list": {
+        "child_device_list": [
+            {
+                "avatar": "ceiling_fan",
+                "bind_count": 1,
+                "category": "kasa.switch.outlet.sub-fan",
+                "default_states": {
+                    "re_power_fan_speed": 1,
+                    "re_power_type": "last_states",
+                    "re_power_type_capability": [
+                        "last_states",
+                        "always_on",
+                        "always_off"
+                    ]
+                },
+                "device_id": "SCRUBBED_CHILD_DEVICE_ID_2",
+                "device_on": false,
+                "fan_sleep_mode_on": false,
+                "fan_speed_level": 3,
+                "fw_id": "00000000000000000000000000000000",
+                "fw_ver": "1.0.9 Build 241213 Rel.154621",
+                "gc": 1,
+                "has_set_location_info": false,
+                "hw_id": "00000000000000000000000000000000",
+                "hw_ver": "1.0",
+                "la": 0,
+                "lang": "en_US",
+                "lo": 0,
+                "mac": "F0A731000000",
+                "model": "KS240",
+                "nickname": "I01BU0tFRF9OQU1FIw==",
+                "oem_id": "00000000000000000000000000000000",
+                "original_device_id": "0000000000000000000000000000000000000000",
+                "overheat_status": "normal",
+                "region": "America/Denver",
+                "specs": "",
+                "status_follow_edge": true,
+                "type": "SMART.KASASWITCH"
+            },
+            {
+                "avatar": "switch_ks240",
+                "bind_count": 1,
+                "brightness": 100,
+                "category": "kasa.switch.outlet.sub-dimmer",
+                "default_states": {
+                    "re_power_type": "always_off",
+                    "re_power_type_capability": [
+                        "last_states",
+                        "always_on",
+                        "always_off"
+                    ],
+                    "type": "last_states"
+                },
+                "device_id": "SCRUBBED_CHILD_DEVICE_ID_1",
+                "device_on": false,
+                "fade_off_time": 1,
+                "fade_on_time": 1,
+                "fw_id": "00000000000000000000000000000000",
+                "fw_ver": "1.0.9 Build 241213 Rel.154621",
+                "gc": 1,
+                "gradually_off_mode": 1,
+                "gradually_on_mode": 1,
+                "has_set_location_info": false,
+                "hw_id": "00000000000000000000000000000000",
+                "hw_ver": "1.0",
+                "la": 0,
+                "lang": "en_US",
+                "led_off": 0,
+                "lo": 0,
+                "mac": "F0A731000000",
+                "max_fade_off_time": 60,
+                "max_fade_on_time": 60,
+                "model": "KS240",
+                "nickname": "I01BU0tFRF9OQU1FIw==",
+                "oem_id": "00000000000000000000000000000000",
+                "on_off": 0,
+                "on_time": 0,
+                "original_device_id": "0000000000000000000000000000000000000000",
+                "overheat_status": "normal",
+                "preset_state": [
+                    {
+                        "brightness": 100
+                    },
+                    {
+                        "brightness": 75
+                    },
+                    {
+                        "brightness": 50
+                    },
+                    {
+                        "brightness": 25
+                    },
+                    {
+                        "brightness": 1
+                    }
+                ],
+                "region": "America/Denver",
+                "specs": "",
+                "status_follow_edge": true,
+                "type": "SMART.KASASWITCH"
+            }
+        ],
+        "start_index": 0,
+        "sum": 2
+    },
+    "get_connect_cloud_state": {
+        "status": 0
+    },
+    "get_device_info": {
+        "avatar": "",
+        "device_id": "0000000000000000000000000000000000000000",
+        "fw_id": "00000000000000000000000000000000",
+        "fw_ver": "1.0.9 Build 241213 Rel.154621",
+        "has_set_location_info": true,
+        "hw_id": "00000000000000000000000000000000",
+        "hw_ver": "1.0",
+        "ip": "127.0.0.123",
+        "lang": "en_US",
+        "latitude": 0,
+        "longitude": 0,
+        "mac": "F0-A7-31-00-00-00",
+        "model": "KS240",
+        "nickname": "",
+        "oem_id": "00000000000000000000000000000000",
+        "region": "America/Denver",
+        "rssi": -54,
+        "signal_level": 2,
+        "specs": "",
+        "ssid": "I01BU0tFRF9TU0lEIw==",
+        "time_diff": -420,
+        "type": "SMART.KASASWITCH"
+    },
+    "get_device_time": {
+        "region": "America/Denver",
+        "time_diff": -420,
+        "timestamp": 1738371246
+    },
+    "get_fw_download_state": {
+        "auto_upgrade": false,
+        "download_progress": 0,
+        "reboot_time": 5,
+        "status": 0,
+        "upgrade_time": 5
+    },
+    "get_homekit_info": {
+        "mfi_setup_code": "000-00-000",
+        "mfi_setup_id": "0000",
+        "mfi_token_token": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000+00000000000000000000000000000000000000/00000000000000+0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000/00000000000",
+        "mfi_token_uuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "get_latest_fw": {
+        "fw_size": 0,
+        "fw_ver": "1.0.9 Build 241213 Rel.154621",
+        "hw_id": "",
+        "need_to_upgrade": false,
+        "oem_id": "",
+        "release_date": "",
+        "release_note": "",
+        "type": 0
+    },
+    "get_led_info": {
+        "bri_config": {
+            "bri_type": "overall",
+            "overall_bri": 50
+        },
+        "led_rule": "auto",
+        "led_status": true,
+        "night_mode": {
+            "end_time": 420,
+            "night_mode_type": "custom",
+            "start_time": 1200
+        }
+    },
+    "get_wireless_scan_info": {
+        "ap_list": [
+            {
+                "bssid": "000000000000",
+                "channel": 0,
+                "cipher_type": 2,
+                "key_type": "wpa2_psk",
+                "signal_level": 2,
+                "ssid": "I01BU0tFRF9TU0lEIw=="
+            },
+            {
+                "bssid": "000000000000",
+                "channel": 0,
+                "cipher_type": 2,
+                "key_type": "wpa2_psk",
+                "signal_level": 2,
+                "ssid": "I01BU0tFRF9TU0lEIw=="
+            },
+            {
+                "bssid": "000000000000",
+                "channel": 0,
+                "cipher_type": 2,
+                "key_type": "wpa2_psk",
+                "signal_level": 2,
+                "ssid": "I01BU0tFRF9TU0lEIw=="
+            },
+            {
+                "bssid": "000000000000",
+                "channel": 0,
+                "cipher_type": 2,
+                "key_type": "wpa2_psk",
+                "signal_level": 1,
+                "ssid": "I01BU0tFRF9TU0lEIw=="
+            },
+            {
+                "bssid": "000000000000",
+                "channel": 0,
+                "cipher_type": 2,
+                "key_type": "wpa2_psk",
+                "signal_level": 1,
+                "ssid": "I01BU0tFRF9TU0lEIw=="
+            },
+            {
+                "bssid": "000000000000",
+                "channel": 0,
+                "cipher_type": 2,
+                "key_type": "wpa2_psk",
+                "signal_level": 1,
+                "ssid": "I01BU0tFRF9TU0lEIw=="
+            },
+            {
+                "bssid": "000000000000",
+                "channel": 0,
+                "cipher_type": 2,
+                "key_type": "wpa2_psk",
+                "signal_level": 1,
+                "ssid": "I01BU0tFRF9TU0lEIw=="
+            },
+            {
+                "bssid": "000000000000",
+                "channel": 0,
+                "cipher_type": 2,
+                "key_type": "wpa2_psk",
+                "signal_level": 1,
+                "ssid": "I01BU0tFRF9TU0lEIw=="
+            },
+            {
+                "bssid": "000000000000",
+                "channel": 0,
+                "cipher_type": 2,
+                "key_type": "wpa2_psk",
+                "signal_level": 1,
+                "ssid": "I01BU0tFRF9TU0lEIw=="
+            },
+            {
+                "bssid": "000000000000",
+                "channel": 0,
+                "cipher_type": 2,
+                "key_type": "wpa2_psk",
+                "signal_level": 1,
+                "ssid": "I01BU0tFRF9TU0lEIw=="
+            }
+        ],
+        "start_index": 0,
+        "sum": 10,
+        "wep_supported": false
+    },
+    "qs_component_nego": {
+        "component_list": [
+            {
+                "id": "quick_setup",
+                "ver_code": 3
+            },
+            {
+                "id": "sunrise_sunset",
+                "ver_code": 1
+            },
+            {
+                "id": "ble_whole_setup",
+                "ver_code": 1
+            },
+            {
+                "id": "iot_cloud",
+                "ver_code": 1
+            },
+            {
+                "id": "inherit",
+                "ver_code": 1
+            },
+            {
+                "id": "firmware",
+                "ver_code": 2
+            },
+            {
+                "id": "control_child",
+                "ver_code": 2
+            },
+            {
+                "id": "child_device",
+                "ver_code": 2
+            }
+        ],
+        "extra_info": {
+            "device_model": "KS240",
+            "device_type": "SMART.KASASWITCH",
+            "is_klap": true
+        }
+    }
+}

@@ -306,6 +306,22 @@ class SmartRequest:
         )
 
     @staticmethod
+    def get_dimmer_calibration(
+        params: SmartRequestParams | None = None,
+    ) -> list[SmartRequest]:
+        """Get dimmer calibration."""
+        return [
+            # Not certain if the get_calibration is used anywhere...
+            SmartRequest(
+                "get_calibration", params or SmartRequest.SmartRequestParams()
+            ),
+            # The brightness calibration is used, however.
+            SmartRequest(
+                "get_calibrate_brightness", params or SmartRequest.SmartRequestParams()
+            ),
+        ]
+
+    @staticmethod
     def get_auto_light_info() -> SmartRequest:
         """Get auto light info."""
         return SmartRequest("get_auto_light_info")
@@ -433,7 +449,7 @@ COMPONENT_REQUESTS = {
     ],
     "control_child": [],
     "homekit": [SmartRequest.get_raw_request("get_homekit_info")],
-    "dimmer_calibration": [],
+    "dimmer_calibration": SmartRequest.get_dimmer_calibration(),
     "fan_control": [],
     "overheat_protection": [],
     # Vacuum components

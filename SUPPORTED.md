@@ -126,6 +126,7 @@ Some newer Kasa devices require authentication. These are marked with [^1] in th
   - Hardware: 1.0 (US) / Firmware: 1.0.4[^1]
   - Hardware: 1.0 (US) / Firmware: 1.0.5[^1]
   - Hardware: 1.0 (US) / Firmware: 1.0.7[^1]
+  - Hardware: 1.0 (US) / Firmware: 1.0.9[^1]
 
 ### Bulbs
 

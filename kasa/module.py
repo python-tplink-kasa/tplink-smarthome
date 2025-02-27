@@ -129,6 +129,9 @@ class Module(ABC):
     )
     ContactSensor: Final[ModuleName[smart.ContactSensor]] = ModuleName("ContactSensor")
     DeviceModule: Final[ModuleName[smart.DeviceModule]] = ModuleName("DeviceModule")
+    DimmerCalibration: Final[ModuleName[smart.DimmerCalibration]] = ModuleName(
+        "DimmerCalibration"
+    )
     Firmware: Final[ModuleName[smart.Firmware]] = ModuleName("Firmware")
     FrostProtection: Final[ModuleName[smart.FrostProtection]] = ModuleName(
         "FrostProtection"
