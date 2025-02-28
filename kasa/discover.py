@@ -24,7 +24,7 @@ Discovery returns a dict of {ip: discovered devices}:
 >>> [dev.model for dev in found_devices.values()]
 ['KP303', 'HS110', 'L530E', 'KL430', 'HS220', 'H200']
 
-You can pass username and password for devices requiring authentication
+You can pass username and password for devices requiring authentication:
 
 >>> devices = await Discover.discover(
 >>>     username="user@example.com",
@@ -33,12 +33,15 @@ You can pass username and password for devices requiring authentication
 >>> print(len(devices))
 6
 
-You can also pass a :class:`kasa.Credentials`
+You can also pass a :class:`kasa.Credentials`:
 
 >>> creds = Credentials("user@example.com", "great_password")
 >>> devices = await Discover.discover(credentials=creds)
 >>> print(len(devices))
 6
+
+.. include:: ../creds_hashing.md
+   :parser: myst_parser.sphinx_
 
 Discovery can also be targeted to a specific broadcast address instead of
 the default 255.255.255.255:

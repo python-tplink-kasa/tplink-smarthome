@@ -14,6 +14,9 @@ Discovery returns a list of discovered devices:
 >>> print(device.alias)  # Alias is None because update() has not been called
 None
 
+.. include:: ../creds_hashing.md
+   :parser: myst_parser.sphinx_
+
 >>> config_dict = device.config.to_dict()
 >>> # DeviceConfig.to_dict() can be used to store for later
 >>> print(config_dict)
