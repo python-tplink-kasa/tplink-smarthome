@@ -203,7 +203,7 @@ The following devices have been tested and confirmed as working. If your device 
 - **Light Strips**: L900-10, L900-5, L920-5, L930-5
 - **Cameras**: C100, C110, C210, C220, C225, C325WB, C520WS, C720, TC65, TC70
 - **Doorbells and chimes**: D100C, D130, D230
-- **Vacuums**: RV20 Max Plus, RV30 Max
+- **Vacuums**: RV20 Max Plus, RV20 Mop Plus, RV30 Max
 - **Hubs**: H100, H200
 - **Hub-Connected Devices[^3]**: S200B, S200D, T100, T110, T300, T310, T315
 
